@@ -1,5 +1,5 @@
 <!-- Project Title -->
-<h1 align="center">API Movie App</h1>
+<h1 align="left">API Movie App</h1>
 
 <!-- Project Description -->
 <p align="center">
