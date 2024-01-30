@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:movie_app/constants/asset_constant.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
@@ -37,7 +38,54 @@ class _DashboardState extends State<Dashboard> {
                   image: const DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(AssetConstant.mainBanner)),
-                  borderRadius: BorderRadius.circular(30)),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(left: 10, bottom: 8),
+                    height: 62,
+                    width: 220,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: AppColors.kWhite.withOpacity(0.3)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: AppColors.kOrange),
+                          child: SvgPicture.asset(
+                            AssetConstant.playIcon,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomTextLato(
+                              text01: '',
+                              text02: 'Continue Watching',
+                              fontSize: 12,
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            CustomTextLato(
+                              text01: '',
+                              text02: 'Ready Player one',
+                              fontSize: 16,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 36,
@@ -47,9 +95,16 @@ class _DashboardState extends State<Dashboard> {
               height: 36,
             ),
             CarouselSlider.builder(
-                itemCount: 10,
+                itemCount: AssetConstant.moviePoster.length,
                 itemBuilder: (context, index, realIndex) => Container(
-                      color: AppColors.kOrange,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: AppColors.kOrange,
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image:
+                                AssetImage(AssetConstant.moviePoster[index])),
+                      ),
                     ),
                 options: CarouselOptions(
                   height: 300,

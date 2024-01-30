@@ -41,6 +41,8 @@ dependencies:
   flutter_svg: ^2.0.9
   google_fonts: ^6.1.0
   carousel_slider: ^4.2.1
+  standard_searchbar: ^2.1.1
+  
 
 
 dev_dependencies:
