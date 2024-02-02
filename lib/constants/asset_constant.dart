@@ -6,6 +6,7 @@ class AssetConstant {
   static const homeIcon = '${iconPath}Home.svg';
   static const playIcon = '${iconPath}Icon.svg';
   static const profileIcon = '${iconPath}profile.svg';
+  static const categorySelectLine = '${iconPath}Line 1.svg';
 
   //----- images
 
@@ -19,6 +20,8 @@ class AssetConstant {
   static const poster06 = '${imagePath}banner08.jpg';
   static const poster07 = '${imagePath}banner09.jpg';
 
+  //---- Movie Poster
+
   static List<String> moviePoster = [
     poster01,
     poster02,
@@ -27,5 +30,14 @@ class AssetConstant {
     poster05,
     poster06,
     poster07,
+  ];
+
+  //---- Movie Categorys
+
+  static List<String> movieCategory = [
+    'Movie',
+    'TV Series',
+    'Documentary',
+    'Sport'
   ];
 }

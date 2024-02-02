@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:movie_app/constants/asset_constant.dart';
 import 'package:movie_app/presentation/screens/dashboard/dashboard.dart';
 import 'package:movie_app/presentation/screens/discover/discover.dart';
+import 'package:movie_app/presentation/screens/movie_details/movie_details.dart';
 import 'package:movie_app/presentation/screens/profile/profile.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
@@ -16,7 +17,7 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
-    int currentIndex = 0;
+  int currentIndex = 0;
 
   setBottomBarIndex(index) {
     setState(() {
@@ -26,8 +27,8 @@ class _MyHomeState extends State<MyHome> {
 
   List<Widget> screens = [
     const Dashboard(),
-   const DiscoverScreen(),
-    const ProfileScreen()
+    const DiscoverScreen(),
+    const MovieDetails()
   ];
   @override
   Widget build(BuildContext context) {
@@ -86,8 +87,6 @@ class _MyHomeState extends State<MyHome> {
             ),
           ),
           body: screens[currentIndex],
-        )
-        
-        );
+        ));
   }
 }
