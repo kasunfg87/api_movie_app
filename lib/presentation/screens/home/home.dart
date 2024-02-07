@@ -4,7 +4,6 @@ import 'package:movie_app/constants/asset_constant.dart';
 import 'package:movie_app/presentation/screens/dashboard/dashboard.dart';
 import 'package:movie_app/presentation/screens/discover/discover.dart';
 import 'package:movie_app/presentation/screens/movie_details/movie_details.dart';
-import 'package:movie_app/presentation/screens/profile/profile.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
 import 'package:movie_app/utils/bnb_custom_point.dart';
@@ -35,7 +34,7 @@ class _MyHomeState extends State<MyHome> {
     return PopScope(
         canPop: false,
         child: Scaffold(
-          backgroundColor: AppColors.kBlack,
+          backgroundColor: kBlack,
           bottomNavigationBar: SizedBox(
             height: 100,
             width: SizeConfig.w(context),
@@ -49,7 +48,7 @@ class _MyHomeState extends State<MyHome> {
                     heightFactor: 0.6,
                     child: FloatingActionButton(
                         shape: const CircleBorder(),
-                        backgroundColor: AppColors.kOrange,
+                        backgroundColor: kOrange,
                         elevation: 2,
                         child: SvgPicture.asset(AssetConstant.playIcon),
                         onPressed: () {
@@ -66,7 +65,7 @@ class _MyHomeState extends State<MyHome> {
                     onPressed: () {
                       setBottomBarIndex(0);
                     },
-                    splashColor: AppColors.kOrange,
+                    splashColor: kOrange,
                   ),
                 ),
                 Positioned(
@@ -80,7 +79,7 @@ class _MyHomeState extends State<MyHome> {
                     onPressed: () {
                       setBottomBarIndex(2);
                     },
-                    splashColor: AppColors.kOrange,
+                    splashColor: kOrange,
                   ),
                 ),
               ],

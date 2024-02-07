@@ -23,7 +23,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColors.kBlack,
+        backgroundColor: kBlack,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -40,10 +40,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   ),
                   StandardSearchBar(
                       borderRadius: 25,
-                      suggestionTextStyle:
-                          GoogleFonts.lato(color: AppColors.kWhite),
-                      textStyle: GoogleFonts.lato(color: AppColors.kWhite),
-                      backgroundColor: AppColors.kGray,
+                      suggestionTextStyle: GoogleFonts.lato(color: kWhite),
+                      textStyle: GoogleFonts.lato(color: kWhite),
+                      backgroundColor: kGray,
                       width: 360,
                       suggestions: AssetConstant.moviePoster),
                   const SizedBox(
@@ -90,7 +89,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           margin: const EdgeInsets.all(6),
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                              color: AppColors.kGray,
+                              color: kGray,
                               borderRadius: BorderRadius.circular(10)),
                           child: Column(
                             children: [
@@ -103,8 +102,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                               ),
                               Text(
                                 'Aquaman and the Lost Kingdom',
-                                style:
-                                    GoogleFonts.lato(color: AppColors.kWhite),
+                                style: GoogleFonts.lato(color: kWhite),
                                 textAlign: TextAlign.center,
                               )
                             ],

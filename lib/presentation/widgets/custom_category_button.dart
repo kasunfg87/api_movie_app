@@ -26,7 +26,7 @@ class _CategoryTextButtonState extends State<CategoryTextButton> {
         Text(
           widget.buttonText,
           style: GoogleFonts.lato(
-            color: widget.isSelected ? AppColors.kOrange : AppColors.kWhite,
+            color: widget.isSelected ? kOrange : kWhite,
             fontSize: 16,
           ),
         ),

@@ -6,8 +6,8 @@ class CustomTextLato extends StatelessWidget {
   const CustomTextLato({
     required this.text01,
     required this.text02,
-    this.fontColor01 = AppColors.kOrange,
-    this.fontColor02 = AppColors.kWhite,
+    this.fontColor01 = kOrange,
+    this.fontColor02 = kWhite,
     this.fontSize = 24,
     this.multiColor = false,
     super.key,

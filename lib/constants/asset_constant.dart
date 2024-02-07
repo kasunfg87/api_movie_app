@@ -7,6 +7,8 @@ class AssetConstant {
   static const playIcon = '${iconPath}Icon.svg';
   static const profileIcon = '${iconPath}profile.svg';
   static const categorySelectLine = '${iconPath}Line 1.svg';
+  static const forKIcon = '${iconPath}timer.svg';
+  static const timer = '${iconPath}4k.svg';
 
   //----- images
 

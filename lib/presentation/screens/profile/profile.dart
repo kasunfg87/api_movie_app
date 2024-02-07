@@ -15,7 +15,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Center(
         child: Text(
       'Profile Screen',
-      style: GoogleFonts.lato(color: AppColors.kWhite),
+      style: GoogleFonts.lato(color: kWhite),
     ));
   }
 }

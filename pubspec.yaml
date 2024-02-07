@@ -43,6 +43,7 @@ dependencies:
   carousel_slider: ^4.2.1
   standard_searchbar: ^2.1.1
   flutter_staggered_grid_view: ^0.7.0
+  styled_divider: ^1.0.5
   
 
 

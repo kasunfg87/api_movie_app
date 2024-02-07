@@ -17,7 +17,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.kBlack,
+      backgroundColor: kBlack,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -48,13 +48,13 @@ class _DashboardState extends State<Dashboard> {
                     width: 220,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: AppColors.kWhite.withOpacity(0.3)),
+                        color: kWhite.withOpacity(0.3)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
                           decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: AppColors.kOrange),
+                              shape: BoxShape.circle, color: kOrange),
                           child: SvgPicture.asset(
                             AssetConstant.playIcon,
                           ),
@@ -99,7 +99,7 @@ class _DashboardState extends State<Dashboard> {
                 itemBuilder: (context, index, realIndex) => Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: AppColors.kOrange,
+                        color: kOrange,
                         image: DecorationImage(
                             fit: BoxFit.cover,
                             image:
