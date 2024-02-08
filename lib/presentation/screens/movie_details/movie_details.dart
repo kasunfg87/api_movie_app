@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/constants/asset_constant.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato_small.dart';
+import 'package:movie_app/presentation/widgets/gradient_backgrount.dart';
+import 'package:movie_app/presentation/widgets/movie_genre.dart';
+import 'package:movie_app/presentation/widgets/releted_movie.dart';
+import 'package:movie_app/presentation/widgets/thumbnail_image.dart';
+import 'package:readmore/readmore.dart';
 import 'package:styled_divider/styled_divider.dart';
 
 class MovieDetails extends StatefulWidget {
@@ -17,30 +23,22 @@ class _MovieDetailsState extends State<MovieDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBlack,
       body: Stack(
         children: [
           Container(
             height: double.infinity,
             color: kBlack,
           ),
-          Image.network(
-            'https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/6408f676b5811234c887ca62_top%20gun%20maverick-min.png',
-            width: double.infinity,
-            height: SizeConfig.h(context) * 0.7,
-            fit: BoxFit.cover,
+          const ThumbnailImage(
+            networkImage:
+                'https://lumiere-a.akamaihd.net/v1/images/image_b81e5aed.jpeg',
           ),
-          const Positioned.fill(
-              child: DecoratedBox(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.transparent, Color.fromARGB(246, 0, 3, 17)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: [0.3, 0.6])),
-          )),
+          const GradientBackground(),
           Positioned(
-              top: SizeConfig.h(context) * 0.5,
+              top: SizeConfig.h(context) * 0.35,
               child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +48,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                       fontSize: 24,
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 8,
                     ),
                     Row(
                       children: [
@@ -67,7 +65,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                           ],
                         ),
                         const SizedBox(
-                          width: 20,
+                          width: 12,
                         ),
                         const Row(
                           children: [
@@ -88,7 +86,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                       width: SizeConfig.w(context) * 0.9,
                       child: const StyledDivider(
                         color: kWhite,
-                        height: 50,
+                        height: 15,
                         thickness: 0.20,
                         lineStyle: DividerLineStyle.solid,
                         indent: 0,
@@ -113,7 +111,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                           ],
                         ),
                         const SizedBox(
-                          width: 30,
+                          width: 40,
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,19 +121,67 @@ class _MovieDetailsState extends State<MovieDetails> {
                               fontSize: 17,
                               fontWeight: FontWeight.w500,
                             ),
-                            Container(
-                                margin: EdgeInsets.only(top: 8),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 3),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    border:
-                                        Border.all(color: kWhite, width: 0.5)),
-                                child:
-                                    const CustomTextLatoSmall(text: 'Action'))
+                            GenreButton(
+                              movieGenre: 'Action',
+                              onTap: () {},
+                            )
                           ],
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      width: SizeConfig.w(context) * 0.9,
+                      child: const StyledDivider(
+                        color: kWhite,
+                        height: 15,
+                        thickness: 0.20,
+                        lineStyle: DividerLineStyle.solid,
+                        indent: 0,
+                        endIndent: 0,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const CustomTextLatoSmall(
+                      text: 'Synopsis',
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                        width: SizeConfig.w(context) * 0.95,
+                        child: ReadMoreText(
+                          'Jedi Master-in-hiding Luke Skywalker unwillingly attempts to guide young hopeful Rey in the ways of the force, while Leia, former princess turned general, attempts to lead what is left of the Resistance away from the ruthless tyrannical grip of the First Order.',
+                          trimLines: 4,
+                          style: GoogleFonts.lato(color: kWhite),
+                          trimMode: TrimMode.Line,
+                          trimCollapsedText: 'Readmore',
+                          trimExpandedText: 'Readless',
+                          moreStyle: GoogleFonts.lato(
+                              fontSize: 14, fontWeight: FontWeight.w800),
+                          lessStyle: GoogleFonts.lato(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w800,
+                              color: kWhite),
+                        )),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const CustomTextLatoSmall(
+                      text: 'Related Movies',
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    const RelatedMovie(
+                      movieImage:
+                          'https://hd.wallpaperswide.com/thumbs/star_wars_the_last_jedi-t2.jpg',
+                      movieTitle: '',
                     )
                   ],
                 ),
