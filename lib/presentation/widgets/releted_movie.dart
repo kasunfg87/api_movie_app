@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato_small.dart';
+import 'package:movie_app/presentation/widgets/releted_movie_tile.dart';
 
-class RelatedMovie extends StatelessWidget {
-  const RelatedMovie({
+class ReletedMovie extends StatelessWidget {
+  const ReletedMovie({
     super.key,
-    required this.movieImage,
-    required this.movieTitle,
   });
-  final String movieImage, movieTitle;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image.network(
-            width: 142,
-            height: 106,
-            movieImage,
-          ),
+        CustomTextLatoSmall(
+          text: 'Related Movies',
+          fontSize: 17,
+          fontWeight: FontWeight.w500,
         ),
-        const SizedBox(
+        SizedBox(
           height: 12,
         ),
-        CustomTextLatoSmall(text: movieTitle)
+        RelatedMovieTile(
+          movieImage:
+              'https://hd.wallpaperswide.com/thumbs/star_wars_the_last_jedi-t2.jpg',
+          movieTitle: '',
+        ),
       ],
     );
   }
