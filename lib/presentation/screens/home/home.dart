@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movie_app/constants/asset_constant.dart';
+import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
 import 'package:movie_app/presentation/screens/dashboard/dashboard.dart';
 import 'package:movie_app/presentation/screens/discover/discover.dart';
 import 'package:movie_app/presentation/screens/movie_details/movie_details.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
+import 'package:movie_app/presentation/utils/end_points.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
 import 'package:movie_app/utils/bnb_custom_point.dart';
+import 'package:provider/provider.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({super.key});
@@ -16,6 +19,13 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
+  @override
+  void initState() {
+    Provider.of<MovieProvider>(context, listen: false)
+        .getMovies(popularMovieEndPoint);
+    super.initState();
+  }
+
   int currentIndex = 0;
 
   setBottomBarIndex(index) {
@@ -29,6 +39,7 @@ class _MyHomeState extends State<MyHome> {
     const DiscoverScreen(),
     const MovieDetails()
   ];
+
   @override
   Widget build(BuildContext context) {
     return PopScope(

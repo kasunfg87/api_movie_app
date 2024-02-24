@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
+import 'package:movie_app/presentation/utils/size_config.dart';
 import 'package:movie_app/presentation/widgets/gradient_backgrount.dart';
 import 'package:movie_app/presentation/widgets/movie_header.dart';
 import 'package:movie_app/presentation/widgets/releted_movie.dart';
@@ -16,19 +17,19 @@ class MovieDetails extends StatefulWidget {
 class _MovieDetailsState extends State<MovieDetails> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: kBlack,
       body: Stack(
         children: [
-          ThumbnailImage(
+          const ThumbnailImage(
             networkImage:
                 'https://lumiere-a.akamaihd.net/v1/images/image_b81e5aed.jpeg',
           ),
-          GradientBackground(),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+          const GradientBackground(),
+          SingleChildScrollView(
+            padding: EdgeInsets.only(
+                left: 20, right: 20, top: SizeConfig.h(context) * 0.4),
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MovieHeader(

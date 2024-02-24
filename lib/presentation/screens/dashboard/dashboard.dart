@@ -2,9 +2,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movie_app/constants/asset_constant.dart';
+import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato.dart';
+import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -94,26 +97,43 @@ class _DashboardState extends State<Dashboard> {
             const SizedBox(
               height: 36,
             ),
-            CarouselSlider.builder(
-                itemCount: AssetConstant.moviePoster.length,
-                itemBuilder: (context, index, realIndex) => Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: kOrange,
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image:
-                                AssetImage(AssetConstant.moviePoster[index])),
-                      ),
-                    ),
-                options: CarouselOptions(
-                  height: 300,
-                  autoPlay: true,
-                  autoPlayCurve: Curves.linear,
-                  viewportFraction: 0.55,
-                  enlargeCenterPage: true,
-                  pageSnapping: true,
-                )),
+            Consumer<MovieProvider>(
+              builder: (context, value, child) {
+                return CarouselSlider.builder(
+                    itemCount: value.movies.length,
+                    itemBuilder: (context, index, realIndex) {
+                      return value.isLoading
+                          ? Shimmer.fromColors(
+                              baseColor: kGray.withOpacity(0.8),
+                              highlightColor: kWhite.withOpacity(0.5),
+                              enabled: true,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: kGray,
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                        'https://image.tmdb.org/t/p/w500${value.movies[index].posterPath}')),
+                              ),
+                            );
+                    },
+                    options: CarouselOptions(
+                      height: 300,
+                      autoPlay: true,
+                      autoPlayCurve: Curves.linear,
+                      viewportFraction: 0.55,
+                      enlargeCenterPage: true,
+                      pageSnapping: true,
+                    ));
+              },
+            )
           ]),
         ),
       ),
