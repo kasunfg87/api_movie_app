@@ -9,6 +9,7 @@ import 'package:movie_app/presentation/utils/size_config.dart';
 import 'package:movie_app/presentation/widgets/custom_category_button.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:standard_searchbar/old/standard_searchbar.dart';
 
 class DiscoverScreen extends StatefulWidget {
@@ -41,12 +42,19 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  StandardSearchBar(
-                    borderRadius: 25,
-                    suggestionTextStyle: GoogleFonts.lato(color: kWhite),
-                    textStyle: GoogleFonts.lato(color: kWhite),
-                    backgroundColor: kGray,
-                    width: 360,
+                  Consumer<MovieProvider>(
+                    builder: (context, value, child) {
+                      return StandardSearchBar(
+                        onChanged: (input) {
+                          value.searchMovies(input);
+                        },
+                        borderRadius: 25,
+                        suggestionTextStyle: GoogleFonts.lato(color: kWhite),
+                        textStyle: GoogleFonts.lato(color: kWhite),
+                        backgroundColor: kGray,
+                        width: 360,
+                      );
+                    },
                   ),
                   const SizedBox(
                     height: 24,
@@ -68,7 +76,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                   .getMovies(popularMovieEndPoint);
                             } else if (selectdIndex == 1) {
                               Provider.of<MovieProvider>(context, listen: false)
-                                  .searchMovies('prince of persia');
+                                  .getMovies(popularTvEndPoint);
                             }
                           },
                           child: CategoryTextButton(
@@ -110,11 +118,17 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                                 BorderRadius.circular(10)),
                                         child: Column(
                                           children: [
-                                            ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                child: Image.network(
-                                                    'https://image.tmdb.org/t/p/w500${value.movies[index].posterPath}')),
+                                            value.movies[index].posterPath !=
+                                                    null
+                                                ? ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    child: Image.network(
+                                                        'https://image.tmdb.org/t/p/w500${value.movies[index].posterPath}'))
+                                                : Container(
+                                                    color: kOrange,
+                                                  ),
                                             const SizedBox(
                                               height: 5,
                                             ),
