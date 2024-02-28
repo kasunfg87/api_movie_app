@@ -107,47 +107,61 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                               ),
                               itemBuilder: (context, index) {
                                 return value.isLoading
-                                    ? const Center(
-                                        child: CircularProgressIndicator())
-                                    : Container(
-                                        margin: const EdgeInsets.all(6),
-                                        padding: const EdgeInsets.all(6),
-                                        decoration: BoxDecoration(
-                                            color: kGray,
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: Column(
-                                          children: [
-                                            value.movies[index].posterPath !=
-                                                    null
-                                                ? ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    child: Image.network(
-                                                        'https://image.tmdb.org/t/p/w500${value.movies[index].posterPath}'))
-                                                : Container(
-                                                    color: kOrange,
-                                                  ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              value.movies[index]
-                                                          .originalName !=
-                                                      null
-                                                  ? value.movies[index]
-                                                      .originalName
-                                                      .toString()
-                                                  : value.movies[index]
-                                                      .originalTitle
-                                                      .toString(),
-                                              style: GoogleFonts.lato(
-                                                  color: kWhite),
-                                              textAlign: TextAlign.center,
-                                            )
-                                          ],
-                                        ));
+                                    ? Shimmer.fromColors(
+                                        baseColor: kGray,
+                                        highlightColor: Colors.black,
+                                        child: Container(
+                                          padding: const EdgeInsets.all(10),
+                                          color: kWhite,
+                                          height: double.maxFinite,
+                                        ))
+                                    : InkWell(
+                                        onTap: () {
+                                          Provider.of<MovieProvider>(context,
+                                                  listen: false)
+                                              .setMovie(value.movies[index]);
+                                        },
+                                        child: Container(
+                                            margin: const EdgeInsets.all(6),
+                                            padding: const EdgeInsets.all(6),
+                                            decoration: BoxDecoration(
+                                                color: kGray,
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: Column(
+                                              children: [
+                                                value.movies[index]
+                                                            .posterPath !=
+                                                        null
+                                                    ? ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        child: Image.network(
+                                                            'https://image.tmdb.org/t/p/w500${value.movies[index].posterPath}'))
+                                                    : Container(
+                                                        color: kOrange,
+                                                      ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  value.movies[index]
+                                                              .originalName !=
+                                                          null
+                                                      ? value.movies[index]
+                                                          .originalName
+                                                          .toString()
+                                                      : value.movies[index]
+                                                          .originalTitle
+                                                          .toString(),
+                                                  style: GoogleFonts.lato(
+                                                      color: kWhite),
+                                                  textAlign: TextAlign.center,
+                                                )
+                                              ],
+                                            )),
+                                      );
                               });
                         },
                       )),

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:movie_app/core/entities/objects.dart';
 import 'package:movie_app/data/remote/secret.dart';
-import 'package:movie_app/presentation/utils/end_points.dart';
 
 class MovieApiServices {
   Future<List<MovieModel>> getMovies(String endPont) async {

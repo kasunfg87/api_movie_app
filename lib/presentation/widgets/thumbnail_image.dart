@@ -11,9 +11,9 @@ class ThumbnailImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.network(
-      networkImage,
+      'https://image.tmdb.org/t/p/w500$networkImage',
       width: double.infinity,
-      height: SizeConfig.h(context) * 0.6,
+      height: SizeConfig.h(context) * 0.7,
       fit: BoxFit.cover,
     );
   }

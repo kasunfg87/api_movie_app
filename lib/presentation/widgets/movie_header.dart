@@ -17,7 +17,7 @@ class MovieHeader extends StatelessWidget {
     required this.movieGenre,
   });
   final String movieTilte, movietime, movieRating, movieReleaseDate;
-  final List<String> movieGenre;
+  final List<int?> movieGenre;
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +92,7 @@ class MovieHeader extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              width: 40,
+              width: 20,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +103,7 @@ class MovieHeader extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
                 SizedBox(
-                  width: SizeConfig.w(context) * 0.525,
+                  width: SizeConfig.w(context) * 0.550,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -112,7 +112,8 @@ class MovieHeader extends StatelessWidget {
                         (index) => Container(
                           margin: const EdgeInsets.only(right: 8),
                           child: GenreButton(
-                            movieGenre: movieGenre[index],
+                            movieGenre: AssetConstant.getGenreByIndex(
+                                movieGenre[index]!.toInt()),
                             onTap: () {},
                           ),
                         ),

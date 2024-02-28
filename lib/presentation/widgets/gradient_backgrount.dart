@@ -15,7 +15,7 @@ class GradientBackground extends StatelessWidget {
               colors: [Colors.transparent, kBlack],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              stops: [0.1, 0.5])),
+              stops: [0.1, 0.6])),
     ));
   }
 }
