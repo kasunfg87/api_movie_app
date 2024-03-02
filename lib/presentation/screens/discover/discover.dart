@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_app/constants/asset_constant.dart';
+import 'package:movie_app/data/remote/secret.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
+import 'package:movie_app/presentation/screens/movie_details/movie_details.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/end_points.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
@@ -14,6 +15,8 @@ import 'package:standard_searchbar/old/standard_searchbar.dart';
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
+
+  static String routeName = "/discover";
 
   @override
   State<DiscoverScreen> createState() => _DiscoverScreenState();
@@ -66,29 +69,31 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            setState(() {
-                              selectdIndex = index;
-                            });
-                            if (selectdIndex == 0) {
-                              Provider.of<MovieProvider>(context, listen: false)
-                                  .getMovies(popularMovieEndPoint);
-                            } else if (selectdIndex == 1) {
-                              Provider.of<MovieProvider>(context, listen: false)
-                                  .getMovies(popularTvEndPoint);
-                            }
+                        return Consumer<MovieProvider>(
+                          builder: (context, value, child) {
+                            return InkWell(
+                              onTap: () {
+                                setState(() {
+                                  selectdIndex = index;
+                                });
+
+                                value.getMovies(
+                                    '$movieByGenreEndPoint${value.genres[index].id}&$apiKey');
+                              },
+                              child: CategoryTextButton(
+                                buttonText: value.genres[index].name.toString(),
+                                isSelected:
+                                    selectdIndex == index ? true : false,
+                              ),
+                            );
                           },
-                          child: CategoryTextButton(
-                            buttonText: AssetConstant.movieCategory[index],
-                            isSelected: selectdIndex == index ? true : false,
-                          ),
                         );
                       },
                       separatorBuilder: (context, index) => const SizedBox(
                         width: 24,
                       ),
-                      itemCount: AssetConstant.movieCategory.length,
+                      itemCount:
+                          Provider.of<MovieProvider>(context).genres.length,
                     ),
                   ),
                   const SizedBox(
@@ -120,6 +125,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                           Provider.of<MovieProvider>(context,
                                                   listen: false)
                                               .setMovie(value.movies[index]);
+                                          Navigator.pushNamed(
+                                              context, MovieDetails.routeName);
                                         },
                                         child: Container(
                                             margin: const EdgeInsets.all(6),

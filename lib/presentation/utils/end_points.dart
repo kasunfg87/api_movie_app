@@ -9,3 +9,8 @@ const upcomingMovieEndPoint =
 const popularTvEndPoint = 'https://api.themoviedb.org/3/tv/popular?$apiKey';
 
 const baseUrl = 'https://api.themoviedb.org/3/search/movie?';
+
+const genreEndPoint = 'https://api.themoviedb.org/3/genre/movie/list?$apiKey';
+
+const movieByGenreEndPoint =
+    'https://api.themoviedb.org/3/discover/movie?with_genres=';

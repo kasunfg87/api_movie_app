@@ -43,4 +43,21 @@ class MovieApiServices {
       throw ('cant get movies');
     }
   }
+
+  Future<List<GenreModel>> getGenre(String endPont) async {
+    Response response = await get(Uri.parse(endPont));
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> json = jsonDecode(response.body);
+
+      List<dynamic> body = json['genres'];
+
+      List<GenreModel> genreModel =
+          body.map((dynamic item) => GenreModel.fromJson(item)).toList();
+
+      return genreModel;
+    } else {
+      throw ('cant get genres');
+    }
+  }
 }

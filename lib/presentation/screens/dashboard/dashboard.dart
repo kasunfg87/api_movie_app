@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:movie_app/constants/asset_constant.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
+import 'package:movie_app/presentation/utils/end_points.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato.dart';
 import 'package:provider/provider.dart';
@@ -12,11 +13,20 @@ import 'package:shimmer/shimmer.dart';
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
+  static String routeName = "/dashboard";
+
   @override
   State<Dashboard> createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<MovieProvider>(context, listen: false)
+        .getMovies(popularMovieEndPoint);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +36,9 @@ class _DashboardState extends State<Dashboard> {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const SizedBox(
+              height: 20,
+            ),
             const CustomTextLato(
               text01: 'Stream ',
               text02: 'Everywhere',
@@ -104,7 +117,7 @@ class _DashboardState extends State<Dashboard> {
                     itemBuilder: (context, index, realIndex) {
                       return value.isLoading
                           ? Shimmer.fromColors(
-                              baseColor: kGray.withOpacity(0.8),
+                              baseColor: kOrange.withOpacity(0.8),
                               highlightColor: kWhite.withOpacity(0.5),
                               enabled: true,
                               child: Container(

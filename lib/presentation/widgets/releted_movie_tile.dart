@@ -11,21 +11,25 @@ class RelatedMovieTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image.network(
-            width: 142,
-            height: 106,
-            movieImage,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              width: 142,
+              height: 106,
+              movieImage,
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-        CustomTextLatoSmall(text: movieTitle)
-      ],
+          const SizedBox(
+            height: 12,
+          ),
+          CustomTextLatoSmall(text: movieTitle)
+        ],
+      ),
     );
   }
 }

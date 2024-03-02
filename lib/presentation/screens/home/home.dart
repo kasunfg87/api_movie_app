@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:movie_app/constants/asset_constant.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
 import 'package:movie_app/presentation/screens/dashboard/dashboard.dart';
 import 'package:movie_app/presentation/screens/discover/discover.dart';
 import 'package:movie_app/presentation/screens/movie_details/movie_details.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/end_points.dart';
-import 'package:movie_app/presentation/utils/size_config.dart';
-import 'package:movie_app/utils/bnb_custom_point.dart';
 import 'package:provider/provider.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({super.key});
+
+  static String routeName = "/home";
 
   @override
   State<MyHome> createState() => _MyHomeState();
@@ -21,9 +22,12 @@ class MyHome extends StatefulWidget {
 class _MyHomeState extends State<MyHome> {
   @override
   void initState() {
+    super.initState();
     Provider.of<MovieProvider>(context, listen: false)
         .getMovies(popularMovieEndPoint);
-    super.initState();
+
+    Provider.of<MovieProvider>(context, listen: false)
+        .getGenreList(genreEndPoint);
   }
 
   int currentIndex = 0;
@@ -45,57 +49,35 @@ class _MyHomeState extends State<MyHome> {
     return PopScope(
         canPop: false,
         child: Scaffold(
-          backgroundColor: kBlack,
-          bottomNavigationBar: SizedBox(
-            height: 100,
-            width: SizeConfig.w(context),
-            child: Stack(
-              children: [
-                CustomPaint(
-                  size: Size(SizeConfig.w(context), 100),
-                  painter: BNBCustomPainter(),
-                ),
-                Center(
-                    heightFactor: 0.6,
-                    child: FloatingActionButton(
-                        shape: const CircleBorder(),
-                        backgroundColor: kOrange,
-                        elevation: 2,
-                        child: SvgPicture.asset(AssetConstant.playIcon),
-                        onPressed: () {
-                          setBottomBarIndex(1);
-                        })),
-                Positioned(
-                  top: 20,
-                  left: SizeConfig.w(context) * 0.15,
-                  child: IconButton(
-                    icon: SvgPicture.asset(
-                      AssetConstant.homeIcon,
-                      // ignore: deprecated_member_use
-                    ),
-                    onPressed: () {
-                      setBottomBarIndex(0);
-                    },
-                    splashColor: kOrange,
+          backgroundColor: kBlack.withOpacity(0.3),
+          bottomNavigationBar: SalomonBottomBar(
+              selectedItemColor: kOrange,
+              unselectedItemColor: Colors.grey,
+              currentIndex: currentIndex,
+              onTap: (index) => setState(() => currentIndex = index),
+              items: [
+                SalomonBottomBarItem(
+                  icon: const FaIcon(FontAwesomeIcons.houseUser),
+                  title: Text(
+                    "Home",
+                    style: GoogleFonts.poppins(),
                   ),
                 ),
-                Positioned(
-                  top: 20,
-                  right: SizeConfig.w(context) * 0.15,
-                  child: IconButton(
-                    icon: SvgPicture.asset(
-                      AssetConstant.profileIcon,
-                      // ignore: deprecated_member_use
-                    ),
-                    onPressed: () {
-                      setBottomBarIndex(2);
-                    },
-                    splashColor: kOrange,
+                SalomonBottomBarItem(
+                  icon: const FaIcon(FontAwesomeIcons.film),
+                  title: Text(
+                    "Discover",
+                    style: GoogleFonts.poppins(),
                   ),
                 ),
-              ],
-            ),
-          ),
+                SalomonBottomBarItem(
+                  icon: const FaIcon(FontAwesomeIcons.user),
+                  title: Text(
+                    "Profile",
+                    style: GoogleFonts.poppins(),
+                  ),
+                ),
+              ]),
           body: screens[currentIndex],
         ));
   }

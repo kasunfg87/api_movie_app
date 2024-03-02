@@ -13,6 +13,8 @@ import 'package:provider/provider.dart';
 class MovieDetails extends StatefulWidget {
   const MovieDetails({super.key});
 
+  static String routeName = "/details";
+
   @override
   State<MovieDetails> createState() => _MovieDetailsState();
 }
@@ -28,6 +30,18 @@ class _MovieDetailsState extends State<MovieDetails> {
               children: [
                 ThumbnailImage(
                   networkImage: value.movieModel.posterPath.toString(),
+                ),
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 16, top: 35),
+                    padding: const EdgeInsets.all(5),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
+                    child: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: kWhite,
+                    ),
+                  ),
                 ),
                 const GradientBackground(),
                 SingleChildScrollView(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
 import 'package:movie_app/presentation/screens/home/home.dart';
+import 'package:movie_app/routes.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const MyHome(),
+      routes: routes,
+      initialRoute: MyHome.routeName,
     );
   }
 }

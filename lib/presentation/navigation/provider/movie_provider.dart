@@ -26,6 +26,14 @@ class MovieProvider extends ChangeNotifier {
     _isLoading = val;
   }
 
+  // ----- a list to store the movie list
+
+  List<GenreModel> _genres = [];
+
+  // ----- getter for movie list
+
+  List<GenreModel> get genres => _genres;
+
   // ----- fetch movie function
 
   Future<void> getMovies(String endPoint) async {
@@ -36,7 +44,6 @@ class MovieProvider extends ChangeNotifier {
       _movies = await MovieApiServices().getMovies(endPoint);
       Logger().i(_movies.length);
       Logger().i(_movies[1].id);
-      notifyListeners();
 
       // stop the loader
       setLoading(false);
@@ -44,6 +51,10 @@ class MovieProvider extends ChangeNotifier {
       Logger().e(e);
       // stop the loader
       setLoading(false);
+    } finally {
+      // stop the loader
+      setLoading(false);
+      notifyListeners();
     }
   }
 
@@ -55,7 +66,27 @@ class MovieProvider extends ChangeNotifier {
       _movies = await MovieApiServices().searchMovie(query);
       Logger().i(_movies[0].id);
 
+      // stop the loader
+      setLoading(false);
+    } catch (e) {
+      Logger().e(e);
+      // stop the loader
+      setLoading(false);
+    } finally {
+      // stop the loader
+      setLoading(false);
       notifyListeners();
+    }
+  }
+
+  Future<void> getGenreList(String endPoint) async {
+    try {
+      // start the loader
+      setLoading(true);
+
+      _genres = await MovieApiServices().getGenre(endPoint);
+      Logger().i(_genres.length);
+      Logger().i(_genres[1].id);
 
       // stop the loader
       setLoading(false);
@@ -63,6 +94,10 @@ class MovieProvider extends ChangeNotifier {
       Logger().e(e);
       // stop the loader
       setLoading(false);
+    } finally {
+      // stop the loader
+      setLoading(false);
+      notifyListeners();
     }
   }
 
@@ -78,6 +113,7 @@ class MovieProvider extends ChangeNotifier {
 
   void setMovie(MovieModel model) {
     _movieModel = model;
+
     notifyListeners();
   }
 }

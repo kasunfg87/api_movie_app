@@ -45,3 +45,14 @@ Map<String, dynamic> _$MovieModelToJson(MovieModel instance) =>
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
     };
+
+GenreModel _$GenreModelFromJson(Map<String, dynamic> json) => GenreModel(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$GenreModelToJson(GenreModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+    };
