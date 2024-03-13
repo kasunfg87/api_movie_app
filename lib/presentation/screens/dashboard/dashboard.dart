@@ -113,7 +113,7 @@ class _DashboardState extends State<Dashboard> {
             Consumer<MovieProvider>(
               builder: (context, value, child) {
                 return CarouselSlider.builder(
-                    itemCount: value.movies.length,
+                    itemCount: value.movies.isEmpty ? 0 : value.movies.length,
                     itemBuilder: (context, index, realIndex) {
                       return value.isLoading
                           ? Shimmer.fromColors(

@@ -12,6 +12,14 @@ class MovieProvider extends ChangeNotifier {
 
   List<MovieModel> get movies => _movies;
 
+  // ----- a list to store the similar movie list
+
+  List<MovieModel> _similarMovies = [];
+
+  // ----- getter for similar movie list
+
+  List<MovieModel> get similarMovies => _similarMovies;
+
   // ----- loading state
 
   bool _isLoading = false;
@@ -87,6 +95,27 @@ class MovieProvider extends ChangeNotifier {
       _genres = await MovieApiServices().getGenre(endPoint);
       Logger().i(_genres.length);
       Logger().i(_genres[1].id);
+
+      // stop the loader
+      setLoading(false);
+    } catch (e) {
+      Logger().e(e);
+      // stop the loader
+      setLoading(false);
+    } finally {
+      // stop the loader
+      setLoading(false);
+      notifyListeners();
+    }
+  }
+
+  Future<void> getSimilarMovies(String endPoint) async {
+    try {
+      // start the loader
+      setLoading(true);
+
+      _similarMovies = await MovieApiServices().getMovies(endPoint);
+      Logger().i(_similarMovies.length);
 
       // stop the loader
       setLoading(false);

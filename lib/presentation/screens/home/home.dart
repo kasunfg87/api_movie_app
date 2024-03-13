@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
@@ -28,6 +29,8 @@ class _MyHomeState extends State<MyHome> {
 
     Provider.of<MovieProvider>(context, listen: false)
         .getGenreList(genreEndPoint);
+          SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+      
   }
 
   int currentIndex = 0;
@@ -43,6 +46,7 @@ class _MyHomeState extends State<MyHome> {
     const DiscoverScreen(),
     const MovieDetails()
   ];
+  
 
   @override
   Widget build(BuildContext context) {

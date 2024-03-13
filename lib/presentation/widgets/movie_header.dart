@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:movie_app/constants/asset_constant.dart';
+import 'package:movie_app/core/entities/objects.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato_small.dart';
@@ -10,14 +12,9 @@ import 'package:styled_divider/styled_divider.dart';
 class MovieHeader extends StatelessWidget {
   const MovieHeader({
     super.key,
-    required this.movieTilte,
-    required this.movietime,
-    required this.movieRating,
-    required this.movieReleaseDate,
-    required this.movieGenre,
+     required this.movieModel,
   });
-  final String movieTilte, movietime, movieRating, movieReleaseDate;
-  final List<int?> movieGenre;
+  final MovieModel movieModel;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,7 @@ class MovieHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomTextLatoSmall(
-          text: movieTilte,
+          text: movieModel.title.toString(),
           fontSize: 24,
         ),
         const SizedBox(
@@ -42,7 +39,7 @@ class MovieHeader extends StatelessWidget {
                   // ignore: deprecated_member_use
                   color: kWhite,
                 ),
-                CustomTextLatoSmall(text: movietime)
+                const CustomTextLatoSmall(text: '152 minutes')
               ],
             ),
             const SizedBox(
@@ -58,7 +55,7 @@ class MovieHeader extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                CustomTextLatoSmall(text: movieRating)
+                CustomTextLatoSmall(text: '${movieModel.voteAverage!.toStringAsFixed(1)} (IMDB)')
               ],
             ),
           ],
@@ -85,7 +82,8 @@ class MovieHeader extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
                 CustomTextLatoSmall(
-                  text: movieReleaseDate,
+                  text:  DateFormat.yMMMMd('en_US')
+                            .format(DateTime.parse(movieModel.releaseDate.toString())),
                   fontSize: 13,
                   fontWeight: FontWeight.w300,
                 )
@@ -103,17 +101,17 @@ class MovieHeader extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
                 SizedBox(
-                  width: SizeConfig.w(context) * 0.550,
+                  width: SizeConfig.w(context) * 0.565,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: List.generate(
-                        movieGenre.length,
+                        movieModel.genreIds!.length,
                         (index) => Container(
                           margin: const EdgeInsets.only(right: 8),
                           child: GenreButton(
                             movieGenre: AssetConstant.getGenreByIndex(
-                                movieGenre[index]!.toInt()),
+                                movieModel.genreIds![index].toInt()),
                             onTap: () {},
                           ),
                         ),

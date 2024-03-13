@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/data/remote/secret.dart';
@@ -10,7 +11,6 @@ import 'package:movie_app/presentation/utils/size_config.dart';
 import 'package:movie_app/presentation/widgets/custom_category_button.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:standard_searchbar/old/standard_searchbar.dart';
 
 class DiscoverScreen extends StatefulWidget {
@@ -111,24 +111,23 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                 crossAxisCount: 2,
                               ),
                               itemBuilder: (context, index) {
-                                return value.isLoading
-                                    ? Shimmer.fromColors(
-                                        baseColor: kGray,
-                                        highlightColor: Colors.black,
-                                        child: Container(
-                                          padding: const EdgeInsets.all(10),
-                                          color: kWhite,
-                                          height: double.maxFinite,
-                                        ))
-                                    : InkWell(
-                                        onTap: () {
-                                          Provider.of<MovieProvider>(context,
-                                                  listen: false)
-                                              .setMovie(value.movies[index]);
-                                          Navigator.pushNamed(
-                                              context, MovieDetails.routeName);
-                                        },
-                                        child: Container(
+                                return InkWell(
+                                    onTap: () {
+                                      Provider.of<MovieProvider>(context,
+                                              listen: false)
+                                          .setMovie(value.movies[index]);
+
+                                      Provider.of<MovieProvider>(context,
+                                              listen: false)
+                                          .getSimilarMovies(
+                                              similarMovieEndPoint1stHalf +
+                                                 value.movies[index].id.toString() +
+                                                  similarMovieEndPoint2ndHalf);
+
+                                      Navigator.pushNamed(
+                                          context, MovieDetails.routeName);
+                                    },
+                                    child: Container(
                                             margin: const EdgeInsets.all(6),
                                             padding: const EdgeInsets.all(6),
                                             decoration: BoxDecoration(
@@ -137,18 +136,32 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                                     BorderRadius.circular(10)),
                                             child: Column(
                                               children: [
-                                                value.movies[index]
-                                                            .posterPath !=
-                                                        null
-                                                    ? ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        child: Image.network(
-                                                            'https://image.tmdb.org/t/p/w500${value.movies[index].posterPath}'))
-                                                    : Container(
-                                                        color: kOrange,
-                                                      ),
+                                                // value.movies[index].posterPath != null
+                                                ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    child: Image.network(
+                                                      'https://image.tmdb.org/t/p/w500${value.movies[index].posterPath}',
+                                                      frameBuilder: (context,
+                                                          child,
+                                                          frame,
+                                                          wasSynchronouslyLoaded) {
+                                                        return child;
+                                                      },
+                                                      loadingBuilder: (context,
+                                                          child,
+                                                          loadingProgress) {
+                                                        if (loadingProgress ==
+                                                            null) {
+                                                          return child;
+                                                        } else {
+                                                          return const Center(
+                                                              child:
+                                                                  CircularProgressIndicator());
+                                                        }
+                                                      },
+                                                    )),
                                                 const SizedBox(
                                                   height: 5,
                                                 ),
@@ -167,8 +180,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                                   textAlign: TextAlign.center,
                                                 )
                                               ],
-                                            )),
-                                      );
+                                            ))
+                                        
+                                        );
                               });
                         },
                       )),

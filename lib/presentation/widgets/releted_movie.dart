@@ -1,13 +1,23 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato_small.dart';
 import 'package:movie_app/presentation/widgets/releted_movie_tile.dart';
 import 'package:provider/provider.dart';
 
-class ReletedMovie extends StatelessWidget {
+class ReletedMovie extends StatefulWidget {
   const ReletedMovie({
     super.key,
+    required this.movieId,
   });
+  final String movieId;
+
+  @override
+  State<ReletedMovie> createState() => _ReletedMovieState();
+}
+
+class _ReletedMovieState extends State<ReletedMovie> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +37,13 @@ class ReletedMovie extends StatelessWidget {
             return SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: List.generate(value.movies.length, (index) {
-                  return RelatedMovieTile(
-                    movieImage:
-                        'https://image.tmdb.org/t/p/w500${value.movies[index].backdropPath}',
-                    movieTitle: value.movies[index].originalTitle.toString(),
+                children: List.generate(value.similarMovies.length, (index) {
+                  return FadeInRight(
+                    child: RelatedMovieTile(
+                      movieImage:
+                          'https://image.tmdb.org/t/p/w500${value.similarMovies[index].posterPath}',
+                      
+                    ),
                   );
                 }),
               ),
