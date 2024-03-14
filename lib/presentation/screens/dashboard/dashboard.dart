@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movie_app/constants/asset_constant.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
+import 'package:movie_app/presentation/screens/movie_details/movie_details.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/end_points.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
@@ -126,14 +127,31 @@ class _DashboardState extends State<Dashboard> {
                                 ),
                               ),
                             )
-                          : Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: kGray,
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                        'https://image.tmdb.org/t/p/w500${value.movies[index].posterPath}')),
+                          : InkWell(
+                              onTap: () {
+                                Provider.of<MovieProvider>(context,
+                                        listen: false)
+                                    .setMovie(value.movies[index]);
+
+                                Provider.of<MovieProvider>(context,
+                                        listen: false)
+                                    .getSimilarMovies(
+                                        similarMovieEndPoint1stHalf +
+                                            value.movies[index].id.toString() +
+                                            similarMovieEndPoint2ndHalf);
+
+                                Navigator.pushNamed(
+                                    context, MovieDetails.routeName);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: kGray,
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          'https://image.tmdb.org/t/p/w500${value.movies[index].posterPath}')),
+                                ),
                               ),
                             );
                     },

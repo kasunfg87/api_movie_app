@@ -4,7 +4,6 @@ class RelatedMovieTile extends StatelessWidget {
   const RelatedMovieTile({
     super.key,
     required this.movieImage,
-    
   });
   final String movieImage;
 
@@ -17,15 +16,12 @@ class RelatedMovieTile extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.network(
-              height: 170,
+              // height: 170,
+              width: 110,
               movieImage,
               fit: BoxFit.cover,
             ),
           ),
-          // const SizedBox(
-          //   height: 12,
-          // ),
-          // CustomTextLatoSmall(text: movieTitle)
         ],
       ),
     );

@@ -92,17 +92,16 @@ class MovieHeader extends StatelessWidget {
             const SizedBox(
               width: 20,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const CustomTextLatoSmall(
-                  text: 'Genre',
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500,
-                ),
-                SizedBox(
-                  width: SizeConfig.w(context) * 0.565,
-                  child: SingleChildScrollView(
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomTextLatoSmall(
+                    text: 'Genre',
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: List.generate(
@@ -117,9 +116,9 @@ class MovieHeader extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ],
         ),
