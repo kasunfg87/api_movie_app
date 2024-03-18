@@ -12,7 +12,7 @@ import 'package:styled_divider/styled_divider.dart';
 class MovieHeader extends StatelessWidget {
   const MovieHeader({
     super.key,
-     required this.movieModel,
+    required this.movieModel,
   });
   final MovieModel movieModel;
 
@@ -55,8 +55,29 @@ class MovieHeader extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                CustomTextLatoSmall(text: '${movieModel.voteAverage!.toStringAsFixed(1)} (IMDB)')
+                CustomTextLatoSmall(
+                    text:
+                        '${movieModel.voteAverage!.toStringAsFixed(1)} (IMDB)')
               ],
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            InkWell(
+              onTap: () {},
+              splashColor: kOrange,
+              child: const Row(
+                children: [
+                  Icon(
+                    Icons.play_arrow,
+                    color: kWhite,
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  CustomTextLatoSmall(text: 'Play Trailer')
+                ],
+              ),
             ),
           ],
         ),
@@ -82,8 +103,8 @@ class MovieHeader extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
                 CustomTextLatoSmall(
-                  text:  DateFormat.yMMMMd('en_US')
-                            .format(DateTime.parse(movieModel.releaseDate.toString())),
+                  text: DateFormat.yMMMMd('en_US').format(
+                      DateTime.parse(movieModel.releaseDate.toString())),
                   fontSize: 13,
                   fontWeight: FontWeight.w300,
                 )

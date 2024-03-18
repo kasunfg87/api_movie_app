@@ -18,3 +18,7 @@ const movieByGenreEndPoint =
 const similarMovieEndPoint1stHalf = 'https://api.themoviedb.org/3/movie/';
 
 const similarMovieEndPoint2ndHalf = '/recommendations?$apiKey';
+
+const castEndPoint1stpart = 'https://api.themoviedb.org/3/movie/';
+
+const castEndPoint2ndpart = '/credits?$apiKey=THE_KEY&language=en-US';

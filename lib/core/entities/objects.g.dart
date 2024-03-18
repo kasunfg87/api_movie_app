@@ -56,3 +56,33 @@ Map<String, dynamic> _$GenreModelToJson(GenreModel instance) =>
       'id': instance.id,
       'name': instance.name,
     };
+
+CastModel _$CastModelFromJson(Map<String, dynamic> json) => CastModel(
+      adult: json['adult'] as bool?,
+      gender: json['gender'] as int?,
+      id: json['id'] as int?,
+      knownForDepartment: json['knownForDepartment'] as String?,
+      name: json['name'] as String?,
+      originalName: json['originalName'] as String?,
+      popularity: (json['popularity'] as num?)?.toDouble(),
+      profilePath: json['profilePath'] as String?,
+      castId: json['castId'] as int?,
+      character: json['character'] as String?,
+      creditId: json['creditId'] as String?,
+      order: json['order'] as int?,
+    );
+
+Map<String, dynamic> _$CastModelToJson(CastModel instance) => <String, dynamic>{
+      'adult': instance.adult,
+      'gender': instance.gender,
+      'id': instance.id,
+      'knownForDepartment': instance.knownForDepartment,
+      'name': instance.name,
+      'originalName': instance.originalName,
+      'popularity': instance.popularity,
+      'profilePath': instance.profilePath,
+      'castId': instance.castId,
+      'character': instance.character,
+      'creditId': instance.creditId,
+      'order': instance.order,
+    };

@@ -121,68 +121,72 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                               listen: false)
                                           .getSimilarMovies(
                                               similarMovieEndPoint1stHalf +
-                                                 value.movies[index].id.toString() +
+                                                  value.movies[index].id
+                                                      .toString() +
                                                   similarMovieEndPoint2ndHalf);
+
+                                      Provider.of<MovieProvider>(context,
+                                              listen: false)
+                                          .getCastList(castEndPoint1stpart +
+                                              value.movies[index].id
+                                                  .toString() +
+                                              castEndPoint2ndpart);
 
                                       Navigator.pushNamed(
                                           context, MovieDetails.routeName);
                                     },
                                     child: Container(
-                                            margin: const EdgeInsets.all(6),
-                                            padding: const EdgeInsets.all(6),
-                                            decoration: BoxDecoration(
-                                                color: kGray,
+                                        margin: const EdgeInsets.all(6),
+                                        padding: const EdgeInsets.all(6),
+                                        decoration: BoxDecoration(
+                                            color: kGray,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Column(
+                                          children: [
+                                            // value.movies[index].posterPath != null
+                                            ClipRRect(
                                                 borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            child: Column(
-                                              children: [
-                                                // value.movies[index].posterPath != null
-                                                ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    child: Image.network(
-                                                      'https://image.tmdb.org/t/p/w500${value.movies[index].posterPath}',
-                                                      frameBuilder: (context,
-                                                          child,
-                                                          frame,
-                                                          wasSynchronouslyLoaded) {
-                                                        return child;
-                                                      },
-                                                      loadingBuilder: (context,
-                                                          child,
-                                                          loadingProgress) {
-                                                        if (loadingProgress ==
-                                                            null) {
-                                                          return child;
-                                                        } else {
-                                                          return const Center(
-                                                              child:
-                                                                  CircularProgressIndicator());
-                                                        }
-                                                      },
-                                                    )),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  value.movies[index]
-                                                              .originalName !=
-                                                          null
-                                                      ? value.movies[index]
-                                                          .originalName
-                                                          .toString()
-                                                      : value.movies[index]
-                                                          .originalTitle
-                                                          .toString(),
-                                                  style: GoogleFonts.lato(
-                                                      color: kWhite),
-                                                  textAlign: TextAlign.center,
-                                                )
-                                              ],
-                                            ))
-                                        
-                                        );
+                                                    BorderRadius.circular(10),
+                                                child: Image.network(
+                                                  'https://image.tmdb.org/t/p/w500${value.movies[index].posterPath}',
+                                                  frameBuilder: (context,
+                                                      child,
+                                                      frame,
+                                                      wasSynchronouslyLoaded) {
+                                                    return child;
+                                                  },
+                                                  loadingBuilder: (context,
+                                                      child, loadingProgress) {
+                                                    if (loadingProgress ==
+                                                        null) {
+                                                      return child;
+                                                    } else {
+                                                      return const Center(
+                                                          child:
+                                                              CircularProgressIndicator());
+                                                    }
+                                                  },
+                                                )),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              value.movies[index]
+                                                          .originalName !=
+                                                      null
+                                                  ? value.movies[index]
+                                                      .originalName
+                                                      .toString()
+                                                  : value.movies[index]
+                                                      .originalTitle
+                                                      .toString(),
+                                              style: GoogleFonts.lato(
+                                                  color: kWhite),
+                                              textAlign: TextAlign.center,
+                                            )
+                                          ],
+                                        )));
                               });
                         },
                       )),

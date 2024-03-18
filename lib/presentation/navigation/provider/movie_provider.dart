@@ -42,6 +42,14 @@ class MovieProvider extends ChangeNotifier {
 
   List<GenreModel> get genres => _genres;
 
+  // ----- a list to store the movie list
+
+  List<CastModel> _cast = [];
+
+  // ----- getter for movie list
+
+  List<CastModel> get cast => _cast;
+
   // ----- fetch movie function
 
   Future<void> getMovies(String endPoint) async {
@@ -116,6 +124,28 @@ class MovieProvider extends ChangeNotifier {
 
       _similarMovies = await MovieApiServices().getMovies(endPoint);
       Logger().i(_similarMovies.length);
+
+      // stop the loader
+      setLoading(false);
+    } catch (e) {
+      Logger().e(e);
+      // stop the loader
+      setLoading(false);
+    } finally {
+      // stop the loader
+      setLoading(false);
+      notifyListeners();
+    }
+  }
+
+  Future<void> getCastList(String endPoint) async {
+    try {
+      // start the loader
+      setLoading(true);
+
+      _cast = await MovieApiServices().getMovieCast(endPoint);
+      Logger().i(_genres.length);
+      Logger().i(_genres[1].id);
 
       // stop the loader
       setLoading(false);

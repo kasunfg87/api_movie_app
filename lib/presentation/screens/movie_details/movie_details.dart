@@ -33,6 +33,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                 ),
                 const GradientBackground(),
                 SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.only(left: 18, right: 18, top: 40),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,14 +42,19 @@ class _MovieDetailsState extends State<MovieDetails> {
                       SizedBox(
                         height: SizeConfig.h(context) * 0.30,
                       ),
-                      MovieHeader(movieModel: value.movieModel),
-                      Synopsis(
-                          movieSynopsis: value.movieModel.overview.toString()),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ReletedMovie(
-                        movieId: value.movieModel.id.toString(),
+                      Column(
+                        children: [
+                          MovieHeader(movieModel: value.movieModel),
+                          Synopsis(
+                              movieSynopsis:
+                                  value.movieModel.overview.toString()),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ReletedMovie(
+                            movieId: value.movieModel.id.toString(),
+                          ),
+                        ],
                       ),
                     ],
                   ),
