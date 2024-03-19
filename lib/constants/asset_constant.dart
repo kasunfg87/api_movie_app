@@ -21,6 +21,8 @@ class AssetConstant {
   static const poster05 = '${imagePath}banner07.jpg';
   static const poster06 = '${imagePath}banner08.jpg';
   static const poster07 = '${imagePath}banner09.jpg';
+  static const castPlaceHolder =
+      'https://largeshortfilms.com/wp-content/uploads/2022/10/default-placeholder-profile-icon-avatar-gray-man-90197957.jpg';
 
   //---- Movie Poster
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
+import 'package:movie_app/presentation/widgets/cast_widget.dart';
 import 'package:movie_app/presentation/widgets/custom_back_button.dart';
 import 'package:movie_app/presentation/widgets/gradient_backgrount.dart';
 import 'package:movie_app/presentation/widgets/movie_header.dart';
@@ -54,6 +55,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                           ReletedMovie(
                             movieId: value.movieModel.id.toString(),
                           ),
+                          CastAndCrew(movieId: value.movieModel.id.toString())
                         ],
                       ),
                     ],

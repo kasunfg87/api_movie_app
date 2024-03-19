@@ -143,9 +143,22 @@ class MovieProvider extends ChangeNotifier {
       // start the loader
       setLoading(true);
 
-      _cast = await MovieApiServices().getMovieCast(endPoint);
-      Logger().i(_genres.length);
-      Logger().i(_genres[1].id);
+      List<CastModel> temp = [];
+
+      _cast = [];
+
+      temp = await MovieApiServices().getMovieCast(endPoint);
+
+      // ----- filtering the porduct list
+      // ----- removing the already selceted porduct
+      for (var i = 0; i < temp.length; i++) {
+        if (temp[i].profilePath != null) {
+          _cast.add(temp[i]);
+        }
+      }
+
+      Logger().d(_cast.length);
+      Logger().i(_cast[1].id);
 
       // stop the loader
       setLoading(false);
