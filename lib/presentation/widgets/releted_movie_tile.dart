@@ -9,21 +9,18 @@ class RelatedMovieTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              // height: 170,
-              width: 110,
-              movieImage,
-              fit: BoxFit.cover,
-            ),
+    return Column(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.network(
+            height: 150,
+            width: 110,
+            movieImage,
+            fit: BoxFit.cover,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

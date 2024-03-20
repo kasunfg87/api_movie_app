@@ -156,9 +156,9 @@ class _DashboardState extends State<Dashboard> {
                             );
                     },
                     options: CarouselOptions(
-                      height: 300,
+                      height: 370,
                       autoPlay: true,
-                      autoPlayCurve: Curves.linear,
+                      autoPlayCurve: Curves.linearToEaseOut,
                       viewportFraction: 0.55,
                       enlargeCenterPage: true,
                       pageSnapping: true,

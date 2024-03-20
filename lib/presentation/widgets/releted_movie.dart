@@ -2,6 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
+import 'package:movie_app/presentation/utils/end_points.dart';
+import 'package:movie_app/presentation/utils/size_config.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato_small.dart';
 import 'package:movie_app/presentation/widgets/releted_movie_tile.dart';
 import 'package:provider/provider.dart';
@@ -41,6 +43,14 @@ class _ReletedMovieState extends State<ReletedMovie> {
                         child: InkWell(
                           onTap: () {
                             value.setMovie(value.similarMovies[index]);
+
+                            value.getSimilarMovies(similarMovieEndPoint1stHalf +
+                                value.similarMovies[index].id.toString() +
+                                similarMovieEndPoint2ndHalf);
+
+                            value.getCastList(castEndPoint1stpart +
+                                value.similarMovies[index].id.toString() +
+                                castEndPoint2ndpart);
                           },
                           child: RelatedMovieTile(
                             movieImage:
@@ -50,9 +60,10 @@ class _ReletedMovieState extends State<ReletedMovie> {
                       );
                     },
                     options: CarouselOptions(
+                        height: 180,
                         autoPlay: true,
                         autoPlayCurve: Curves.linear,
-                        viewportFraction: 0.30,
+                        viewportFraction: 0.33,
                         pageSnapping: true,
                         scrollPhysics: const BouncingScrollPhysics()),
                   )
