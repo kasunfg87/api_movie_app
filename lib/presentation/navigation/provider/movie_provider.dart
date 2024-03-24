@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:movie_app/core/entities/objects.dart';
 import 'package:movie_app/data/remote/api_services.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieProvider extends ChangeNotifier {
   // ----- a list to store the movie list
@@ -187,5 +188,15 @@ class MovieProvider extends ChangeNotifier {
     _movieModel = model;
 
     notifyListeners();
+  }
+
+  late YoutubePlayerController _controller;
+
+  YoutubePlayerController get controller => _controller;
+
+  Future<void> initYoutubeController(String videoId) async {
+    _controller = YoutubePlayerController(
+        initialVideoId: videoId,
+        flags: const YoutubePlayerFlags(autoPlay: false, mute: false));
   }
 }
