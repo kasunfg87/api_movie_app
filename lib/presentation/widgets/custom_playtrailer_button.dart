@@ -8,7 +8,9 @@ import 'package:provider/provider.dart';
 class PlayTrailerButton extends StatefulWidget {
   const PlayTrailerButton({
     super.key,
+    required this.trailerKey,
   });
+  final String trailerKey;
 
   @override
   State<PlayTrailerButton> createState() => _PlayTrailerButtonState();
@@ -22,7 +24,7 @@ class _PlayTrailerButtonState extends State<PlayTrailerButton> {
       splashFactory: InkSplash.splashFactory,
       onTap: () {
         Provider.of<MovieProvider>(context, listen: false)
-            .initYoutubeController('s_76M4c4LTo');
+            .initYoutubeController(widget.trailerKey);
         PlayerDialog.openDialog(context, 'movieId');
       },
       child: Container(

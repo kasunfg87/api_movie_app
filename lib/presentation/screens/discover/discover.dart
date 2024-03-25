@@ -131,6 +131,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                                   .toString() +
                                               castEndPoint2ndpart);
 
+                                      Provider.of<MovieProvider>(context,
+                                              listen: false)
+                                          .getTrailerList(value.movies[index].id
+                                              .toString());
                                       Navigator.pushNamed(
                                           context, MovieDetails.routeName);
                                     },

@@ -45,7 +45,10 @@ class _MovieDetailsState extends State<MovieDetails> {
                       ),
                       Column(
                         children: [
-                          MovieHeader(movieModel: value.movieModel),
+                          MovieHeader(
+                            movieModel: value.movieModel,
+                            trailerKey: value.trailer[0].key.toString(),
+                          ),
                           Synopsis(
                               movieSynopsis:
                                   value.movieModel.overview.toString()),

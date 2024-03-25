@@ -74,7 +74,27 @@ class MovieApiServices {
 
       return castModel;
     } else {
-      throw ('cant get movies');
+      throw ('cant get cast');
+    }
+  }
+
+  Future<List<TrailerModel>> getMovieTrailer(String movieId) async {
+    String endPont =
+        'https://api.themoviedb.org/3/movie/$movieId/videos?$apiKey';
+
+    Response response = await get(Uri.parse(endPont));
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> json = jsonDecode(response.body);
+
+      List<dynamic> body = json['results'];
+
+      List<TrailerModel> castModel =
+          body.map((dynamic item) => TrailerModel.fromJson(item)).toList();
+
+      return castModel;
+    } else {
+      throw ('cant get trailer');
     }
   }
 }

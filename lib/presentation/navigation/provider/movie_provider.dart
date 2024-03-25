@@ -51,6 +51,14 @@ class MovieProvider extends ChangeNotifier {
 
   List<CastModel> get cast => _cast;
 
+  // ----- a list to store the movie list
+
+  List<TrailerModel> _trailer = [];
+
+  // ----- getter for movie list
+
+  List<TrailerModel> get trailer => _trailer;
+
   // ----- fetch movie function
 
   Future<void> getMovies(String endPoint) async {
@@ -174,6 +182,40 @@ class MovieProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> getTrailerList(String movieId) async {
+    try {
+      // start the loader
+      setLoading(true);
+
+      List<TrailerModel> temp = [];
+
+      _trailer = [];
+
+      temp = await MovieApiServices().getMovieTrailer(movieId);
+
+      // ----- filtering the porduct list
+      // ----- removing the already selceted porduct
+      for (var i = 0; i < temp.length; i++) {
+        if (temp[i].type!.contains('Trailer')) {
+          _trailer.add(temp[i]);
+        }
+      }
+
+      Logger().d(_trailer.length);
+
+      // stop the loader
+      setLoading(false);
+    } catch (e) {
+      Logger().e(e);
+      // stop the loader
+      setLoading(false);
+    } finally {
+      // stop the loader
+      setLoading(false);
+      notifyListeners();
+    }
+  }
+
   // ----- to store the selected movie model
 
   late MovieModel _movieModel;
@@ -197,6 +239,11 @@ class MovieProvider extends ChangeNotifier {
   Future<void> initYoutubeController(String videoId) async {
     _controller = YoutubePlayerController(
         initialVideoId: videoId,
-        flags: const YoutubePlayerFlags(autoPlay: false, mute: false));
+        flags: const YoutubePlayerFlags(
+          autoPlay: true,
+          mute: false,
+          enableCaption: false,
+          disableDragSeek: true,
+        ));
   }
 }
