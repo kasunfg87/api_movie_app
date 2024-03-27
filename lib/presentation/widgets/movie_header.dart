@@ -11,10 +11,11 @@ import 'package:movie_app/presentation/widgets/movie_genre.dart';
 import 'package:styled_divider/styled_divider.dart';
 
 class MovieHeader extends StatelessWidget {
-  const MovieHeader(
-      {super.key, required this.movieModel, required this.trailerKey});
+  const MovieHeader({
+    super.key,
+    required this.movieModel,
+  });
   final MovieModel movieModel;
-  final String trailerKey;
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +64,7 @@ class MovieHeader extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            PlayTrailerButton(
-              trailerKey: trailerKey,
-            ),
+            const PlayTrailerButton(),
           ],
         ),
         SizedBox(

@@ -55,6 +55,7 @@ dependencies:
   animate_do: ^3.3.4
   flutter_animate: ^4.5.0
   youtube_player_flutter: ^8.1.2
+  flutter_remix: ^0.0.3
  
   
 

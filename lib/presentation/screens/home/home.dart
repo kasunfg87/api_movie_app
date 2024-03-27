@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
@@ -8,6 +9,7 @@ import 'package:movie_app/presentation/screens/discover/discover.dart';
 import 'package:movie_app/presentation/screens/movie_details/movie_details.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/end_points.dart';
+import 'package:movie_app/presentation/widgets/custom_text_lato_small.dart';
 import 'package:provider/provider.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -29,8 +31,8 @@ class _MyHomeState extends State<MyHome> {
 
     Provider.of<MovieProvider>(context, listen: false)
         .getGenreList(genreEndPoint);
-          SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-      
+
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   }
 
   int currentIndex = 0;
@@ -46,7 +48,6 @@ class _MyHomeState extends State<MyHome> {
     const DiscoverScreen(),
     const MovieDetails()
   ];
-  
 
   @override
   Widget build(BuildContext context) {
@@ -61,26 +62,23 @@ class _MyHomeState extends State<MyHome> {
               onTap: (index) => setState(() => currentIndex = index),
               items: [
                 SalomonBottomBarItem(
-                  icon: const FaIcon(FontAwesomeIcons.houseUser),
-                  title: Text(
-                    "Home",
-                    style: GoogleFonts.poppins(),
-                  ),
-                ),
+                    icon: const Icon(
+                      FlutterRemix.home_fill,
+                      size: 28,
+                    ),
+                    title: const CustomTextLatoSmall(text: 'Home')),
                 SalomonBottomBarItem(
-                  icon: const FaIcon(FontAwesomeIcons.film),
-                  title: Text(
-                    "Discover",
-                    style: GoogleFonts.poppins(),
-                  ),
-                ),
+                    icon: const Icon(
+                      FlutterRemix.search_fill,
+                      size: 28,
+                    ),
+                    title: const CustomTextLatoSmall(text: 'Discover')),
                 SalomonBottomBarItem(
-                  icon: const FaIcon(FontAwesomeIcons.user),
-                  title: Text(
-                    "Profile",
-                    style: GoogleFonts.poppins(),
-                  ),
-                ),
+                    icon: const Icon(
+                      FlutterRemix.heart_2_fill,
+                      size: 28,
+                    ),
+                    title: const CustomTextLatoSmall(text: 'Favourite')),
               ]),
           body: screens[currentIndex],
         ));

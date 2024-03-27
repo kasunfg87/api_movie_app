@@ -112,29 +112,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                               itemBuilder: (context, index) {
                                 return InkWell(
                                     onTap: () {
-                                      Provider.of<MovieProvider>(context,
-                                              listen: false)
-                                          .setMovie(value.movies[index]);
+                                      //-- initiate movie
 
                                       Provider.of<MovieProvider>(context,
                                               listen: false)
-                                          .getSimilarMovies(
-                                              similarMovieEndPoint1stHalf +
-                                                  value.movies[index].id
-                                                      .toString() +
-                                                  similarMovieEndPoint2ndHalf);
+                                          .initiateMovie(value.movies[index]);
 
-                                      Provider.of<MovieProvider>(context,
-                                              listen: false)
-                                          .getCastList(castEndPoint1stpart +
-                                              value.movies[index].id
-                                                  .toString() +
-                                              castEndPoint2ndpart);
+                                      //-- navigate to details screen
 
-                                      Provider.of<MovieProvider>(context,
-                                              listen: false)
-                                          .getTrailerList(value.movies[index].id
-                                              .toString());
                                       Navigator.pushNamed(
                                           context, MovieDetails.routeName);
                                     },

@@ -5,7 +5,7 @@ import 'package:movie_app/data/remote/api_services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieProvider extends ChangeNotifier {
-  // ----- a list to store the movie list
+  // -- a list to store the movie list
 
   List<MovieModel> _movies = [];
 
@@ -35,27 +35,27 @@ class MovieProvider extends ChangeNotifier {
     _isLoading = val;
   }
 
-  // ----- a list to store the movie list
+  // ----- a list to store the genres list
 
   List<GenreModel> _genres = [];
 
-  // ----- getter for movie list
+  // ----- getter for genres list
 
   List<GenreModel> get genres => _genres;
 
-  // ----- a list to store the movie list
+  // ----- a list to store the cast and crew list
 
   List<CastModel> _cast = [];
 
-  // ----- getter for movie list
+  // ----- getter for cast and crew list
 
   List<CastModel> get cast => _cast;
 
-  // ----- a list to store the movie list
+  // ----- a list to store the movie trailer list
 
   List<TrailerModel> _trailer = [];
 
-  // ----- getter for movie list
+  // ----- getter for movie trailer list
 
   List<TrailerModel> get trailer => _trailer;
 
@@ -126,82 +126,53 @@ class MovieProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> getSimilarMovies(String endPoint) async {
+  Future<void> initiateMovie(MovieModel movieModel) async {
     try {
       // start the loader
       setLoading(true);
 
-      _similarMovies = await MovieApiServices().getMovies(endPoint);
-      Logger().i(_similarMovies.length);
+      //-- set movie for movie model
 
-      // stop the loader
-      setLoading(false);
-    } catch (e) {
-      Logger().e(e);
-      // stop the loader
-      setLoading(false);
-    } finally {
-      // stop the loader
-      setLoading(false);
-      notifyListeners();
-    }
-  }
+      setMovie(movieModel);
 
-  Future<void> getCastList(String endPoint) async {
-    try {
-      // start the loader
-      setLoading(true);
+      //-- get similar movies using movie id
 
-      List<CastModel> temp = [];
+      _similarMovies =
+          await MovieApiServices().getSimilarMovies(movieModel.id.toString());
+
+      //-- get cast and crew using movie id
+
+      List<CastModel> castTemp = [];
 
       _cast = [];
 
-      temp = await MovieApiServices().getMovieCast(endPoint);
+      castTemp =
+          await MovieApiServices().getMovieCast(movieModel.id.toString());
 
-      // ----- filtering the porduct list
-      // ----- removing the already selceted porduct
-      for (var i = 0; i < temp.length; i++) {
-        if (temp[i].profilePath != null) {
-          _cast.add(temp[i]);
+      // ----- filtering the cast temp list
+      // ----- removing the profile path not available cast
+      for (var i = 0; i < castTemp.length; i++) {
+        if (castTemp[i].profilePath != null) {
+          _cast.add(castTemp[i]);
         }
       }
 
-      Logger().d(_cast.length);
-      Logger().i(_cast[1].id);
+      //-- get get movie trailer using movie id
 
-      // stop the loader
-      setLoading(false);
-    } catch (e) {
-      Logger().e(e);
-      // stop the loader
-      setLoading(false);
-    } finally {
-      // stop the loader
-      setLoading(false);
-      notifyListeners();
-    }
-  }
-
-  Future<void> getTrailerList(String movieId) async {
-    try {
-      // start the loader
-      setLoading(true);
-
-      List<TrailerModel> temp = [];
+      List<TrailerModel> tailerTemp = [];
 
       _trailer = [];
 
-      temp = await MovieApiServices().getMovieTrailer(movieId);
+      tailerTemp =
+          await MovieApiServices().getMovieTrailer(movieModel.id.toString());
 
-      // ----- filtering the porduct list
-      // ----- removing the already selceted porduct
-      for (var i = 0; i < temp.length; i++) {
-        if (temp[i].type!.contains('Trailer')) {
-          _trailer.add(temp[i]);
+      // ----- filtering the video list
+      // ----- removing the other videos
+      for (var i = 0; i < tailerTemp.length; i++) {
+        if (tailerTemp[i].type!.contains('Trailer')) {
+          _trailer.add(tailerTemp[i]);
         }
       }
-
-      Logger().d(_trailer.length);
 
       // stop the loader
       setLoading(false);
@@ -236,9 +207,9 @@ class MovieProvider extends ChangeNotifier {
 
   YoutubePlayerController get controller => _controller;
 
-  Future<void> initYoutubeController(String videoId) async {
+  Future<void> initYoutubeController() async {
     _controller = YoutubePlayerController(
-        initialVideoId: videoId,
+        initialVideoId: _trailer[0].key.toString(),
         flags: const YoutubePlayerFlags(
           autoPlay: true,
           mute: false,

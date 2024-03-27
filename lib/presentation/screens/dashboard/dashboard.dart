@@ -129,16 +129,13 @@ class _DashboardState extends State<Dashboard> {
                             )
                           : InkWell(
                               onTap: () {
-                                Provider.of<MovieProvider>(context,
-                                        listen: false)
-                                    .setMovie(value.movies[index]);
+                                //-- initiate movie
 
                                 Provider.of<MovieProvider>(context,
                                         listen: false)
-                                    .getSimilarMovies(
-                                        similarMovieEndPoint1stHalf +
-                                            value.movies[index].id.toString() +
-                                            similarMovieEndPoint2ndHalf);
+                                    .initiateMovie(value.movies[index]);
+
+                                //-- navigate to details screen
 
                                 Navigator.pushNamed(
                                     context, MovieDetails.routeName);
@@ -159,9 +156,10 @@ class _DashboardState extends State<Dashboard> {
                       height: 370,
                       autoPlay: true,
                       autoPlayCurve: Curves.linearToEaseOut,
-                      viewportFraction: 0.55,
+                      viewportFraction: 0.58,
                       enlargeCenterPage: true,
                       pageSnapping: true,
+                      enableInfiniteScroll: true,
                     ));
               },
             )

@@ -1,7 +1,5 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
@@ -22,6 +20,9 @@ class PlayerDialog {
                 child: SizedBox(
                   height: SizeConfig.h(context) * 0.30,
                   child: YoutubePlayer(
+                    progressColors:
+                        const ProgressBarColors(playedColor: kOrange),
+                    progressIndicatorColor: kOrange,
                     controller: Provider.of<MovieProvider>(context).controller,
                   ),
                 ),

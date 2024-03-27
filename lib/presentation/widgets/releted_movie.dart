@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
-import 'package:movie_app/presentation/utils/end_points.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato_small.dart';
 import 'package:movie_app/presentation/widgets/releted_movie_tile.dart';
 import 'package:provider/provider.dart';
@@ -41,15 +40,8 @@ class _ReletedMovieState extends State<ReletedMovie> {
                       return FadeInRight(
                         child: InkWell(
                           onTap: () {
-                            value.setMovie(value.similarMovies[index]);
-
-                            value.getSimilarMovies(similarMovieEndPoint1stHalf +
-                                value.similarMovies[index].id.toString() +
-                                similarMovieEndPoint2ndHalf);
-
-                            value.getCastList(castEndPoint1stpart +
-                                value.similarMovies[index].id.toString() +
-                                castEndPoint2ndpart);
+                            Provider.of<MovieProvider>(context, listen: false)
+                                .initiateMovie(value.similarMovies[index]);
                           },
                           child: RelatedMovieTile(
                             movieImage:

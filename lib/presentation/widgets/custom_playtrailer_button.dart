@@ -8,9 +8,7 @@ import 'package:provider/provider.dart';
 class PlayTrailerButton extends StatefulWidget {
   const PlayTrailerButton({
     super.key,
-    required this.trailerKey,
   });
-  final String trailerKey;
 
   @override
   State<PlayTrailerButton> createState() => _PlayTrailerButtonState();
@@ -19,36 +17,40 @@ class PlayTrailerButton extends StatefulWidget {
 class _PlayTrailerButtonState extends State<PlayTrailerButton> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: kWhite,
-      splashFactory: InkSplash.splashFactory,
-      onTap: () {
-        Provider.of<MovieProvider>(context, listen: false)
-            .initYoutubeController(widget.trailerKey);
-        PlayerDialog.openDialog(context, 'movieId');
+    return Consumer<MovieProvider>(
+      builder: (context, value, child) {
+        return InkWell(
+          splashColor: kWhite,
+          splashFactory: InkSplash.splashFactory,
+          onTap: () {
+            value.initYoutubeController();
+            PlayerDialog.openDialog(context, 'movieId');
+          },
+          child: Container(
+            padding:
+                const EdgeInsets.only(right: 12, left: 5, top: 1, bottom: 1),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                    width: 0.1, style: BorderStyle.solid, color: kWhite)),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.play_arrow,
+                  color: kOrange,
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                CustomTextLatoSmall(
+                  text: 'Play Trailer',
+                  textColor: kWhite.withOpacity(0.8),
+                )
+              ],
+            ),
+          ),
+        );
       },
-      child: Container(
-        padding: const EdgeInsets.only(right: 12, left: 5, top: 1, bottom: 1),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-                width: 0.1, style: BorderStyle.solid, color: kWhite)),
-        child: Row(
-          children: [
-            const Icon(
-              Icons.play_arrow,
-              color: kOrange,
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            CustomTextLatoSmall(
-              text: 'Play Trailer',
-              textColor: kWhite.withOpacity(0.8),
-            )
-          ],
-        ),
-      ),
     );
   }
 }

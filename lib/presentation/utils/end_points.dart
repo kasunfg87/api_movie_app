@@ -15,10 +15,10 @@ const genreEndPoint = 'https://api.themoviedb.org/3/genre/movie/list?$apiKey';
 const movieByGenreEndPoint =
     'https://api.themoviedb.org/3/discover/movie?with_genres=';
 
-const similarMovieEndPoint1stHalf = 'https://api.themoviedb.org/3/movie/';
+// const similarMovieEndPoint1stHalf = 'https://api.themoviedb.org/3/movie/';
 
-const similarMovieEndPoint2ndHalf = '/recommendations?$apiKey';
+// const similarMovieEndPoint2ndHalf = '/recommendations?$apiKey';
 
-const castEndPoint1stpart = 'https://api.themoviedb.org/3/movie/';
+// const castEndPoint1stpart = 'https://api.themoviedb.org/3/movie/';
 
-const castEndPoint2ndpart = '/credits?$apiKey=THE_KEY&language=en-US';
+// const castEndPoint2ndpart = '/credits?$apiKey=THE_KEY&language=en-US';
