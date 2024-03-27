@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
+import 'package:movie_app/presentation/screens/cast_biography/cast_biography.dart';
 import 'package:movie_app/presentation/widgets/cast_tile.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato_small.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,10 @@ class _CastAndCrewState extends State<CastAndCrew> {
                     itemBuilder: (context, index, realIndex) {
                       return FadeInRight(
                           child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, CastBiography.routeName);
+                              },
                               child: CastTile(castModel: value.cast[index])));
                     },
                     options: CarouselOptions(

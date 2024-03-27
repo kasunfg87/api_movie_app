@@ -13,7 +13,7 @@ class ThumbnailImage extends StatelessWidget {
     return Image.network(
       'https://image.tmdb.org/t/p/w500$networkImage',
       width: double.infinity,
-      height: SizeConfig.h(context) * 0.7,
+      height: SizeConfig.h(context) * 0.6,
       fit: BoxFit.cover,
     );
   }

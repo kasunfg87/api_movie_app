@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
 import 'package:movie_app/presentation/screens/dashboard/dashboard.dart';
 import 'package:movie_app/presentation/screens/discover/discover.dart';
