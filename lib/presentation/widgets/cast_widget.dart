@@ -41,6 +41,15 @@ class _CastAndCrewState extends State<CastAndCrew> {
                       return FadeInRight(
                           child: InkWell(
                               onTap: () {
+                                //--- get cast biography and image
+
+                                Provider.of<MovieProvider>(context,
+                                        listen: false)
+                                    .getCastBiography(
+                                        value.cast[index].id.toString());
+
+                                //--- navigate to cast biography screen
+
                                 Navigator.pushNamed(
                                     context, CastBiography.routeName);
                               },

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
 
 class BlurThumbnailImage extends StatelessWidget {
@@ -17,11 +18,15 @@ class BlurThumbnailImage extends StatelessWidget {
         sigmaX: 60,
         sigmaY: 60,
       ),
-      child: Image.network(
-        'https://image.tmdb.org/t/p/w500$networkImage',
-        width: double.infinity,
-        height: SizeConfig.h(context) * 0.6,
-        fit: BoxFit.fitHeight,
+      child: Material(
+        elevation: 2,
+        shadowColor: kBlack,
+        child: Image.network(
+          'https://image.tmdb.org/t/p/w500$networkImage',
+          width: double.infinity,
+          height: SizeConfig.h(context) * 0.45,
+          fit: BoxFit.fitHeight,
+        ),
       ),
     );
   }

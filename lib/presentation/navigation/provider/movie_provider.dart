@@ -21,6 +21,14 @@ class MovieProvider extends ChangeNotifier {
 
   List<MovieModel> get similarMovies => _similarMovies;
 
+  // ----- a list to store the cast biography list
+
+  List<BiographyModel> _castBiography = [];
+
+  // ----- getter for cast biography list
+
+  List<BiographyModel> get castBiography => _castBiography;
+
   // ----- loading state
 
   bool _isLoading = false;
@@ -173,6 +181,29 @@ class MovieProvider extends ChangeNotifier {
           _trailer.add(tailerTemp[i]);
         }
       }
+
+      // stop the loader
+      setLoading(false);
+    } catch (e) {
+      Logger().e(e);
+      // stop the loader
+      setLoading(false);
+    } finally {
+      // stop the loader
+      setLoading(false);
+      notifyListeners();
+    }
+  }
+
+  Future<void> getCastBiography(String personId) async {
+    try {
+      // start the loader
+      setLoading(true);
+
+      _castBiography = [];
+
+      _castBiography = await MovieApiServices().getBiography(personId);
+      Logger().i(_castBiography.length);
 
       // stop the loader
       setLoading(false);

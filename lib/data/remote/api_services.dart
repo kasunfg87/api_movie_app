@@ -114,12 +114,48 @@ class MovieApiServices {
 
       List<dynamic> body = json['results'];
 
-      List<TrailerModel> castModel =
+      List<TrailerModel> trailerModel =
           body.map((dynamic item) => TrailerModel.fromJson(item)).toList();
 
-      return castModel;
+      return trailerModel;
     } else {
       throw ('cant get trailer');
+    }
+  }
+
+  // Future<List<BiographyModel>> getBiography(String personId) async {
+  //   String endPont = 'https://api.themoviedb.org/3/person/$personId?$apiKey';
+
+  //   Response response = await get(Uri.parse(endPont));
+
+  //   if (response.statusCode == 200) {
+  //     Map<String, dynamic> json = jsonDecode(response.body);
+
+  //     List<dynamic> body = json[''];
+
+  //     List<BiographyModel> biographyModel =
+  //         body.map((dynamic item) => BiographyModel.fromJson(item)).toList();
+
+  //     return biographyModel;
+  //   } else {
+  //     throw ('cant get cast biography');
+  //   }
+  // }
+  Future<List<BiographyModel>> getBiography(String personId) async {
+    String endPoint = 'https://api.themoviedb.org/3/person/$personId?$apiKey';
+
+    Response response = await get(Uri.parse(endPoint));
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> json = jsonDecode(response.body);
+
+      // Directly map the JSON response to BiographyModel
+      BiographyModel biographyModel = BiographyModel.fromJson(json);
+
+      // Return a list containing the single BiographyModel instance
+      return [biographyModel];
+    } else {
+      throw Exception('Failed to get cast biography');
     }
   }
 }
