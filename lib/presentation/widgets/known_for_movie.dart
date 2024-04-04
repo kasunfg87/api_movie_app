@@ -2,32 +2,31 @@ import 'package:animate_do/animate_do.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
+import 'package:movie_app/presentation/screens/movie_details/movie_details.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato_small.dart';
-import 'package:movie_app/presentation/widgets/releted_movie_tile.dart';
+import 'package:movie_app/presentation/widgets/known_for_tile.dart';
 import 'package:provider/provider.dart';
 
-class ReletedMovie extends StatefulWidget {
-  const ReletedMovie({
+class KnownForMovie extends StatefulWidget {
+  const KnownForMovie({
     super.key,
-    required this.movieId,
   });
-  final String movieId;
 
   @override
-  State<ReletedMovie> createState() => _ReletedMovieState();
+  State<KnownForMovie> createState() => _KnownForMovieState();
 }
 
-class _ReletedMovieState extends State<ReletedMovie> {
+class _KnownForMovieState extends State<KnownForMovie> {
   @override
   Widget build(BuildContext context) {
     return Consumer<MovieProvider>(
       builder: (context, value, child) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: value.similarMovies.isNotEmpty
+          children: value.knownFor.isNotEmpty
               ? [
                   const CustomTextLatoSmall(
-                    text: 'You may like',
+                    text: 'Known For',
                     fontSize: 17,
                     fontWeight: FontWeight.w500,
                   ),
@@ -35,17 +34,20 @@ class _ReletedMovieState extends State<ReletedMovie> {
                     height: 15,
                   ),
                   CarouselSlider.builder(
-                    itemCount: value.similarMovies.length,
+                    itemCount: value.knownFor.length,
                     itemBuilder: (context, index, realIndex) {
                       return FadeInRight(
                         child: InkWell(
                           onTap: () {
                             Provider.of<MovieProvider>(context, listen: false)
-                                .initiateMovie(value.similarMovies[index]);
+                                .initiateMovie(value.knownFor[index]);
+
+                            Navigator.pushNamed(
+                                context, MovieDetails.routeName);
                           },
-                          child: RelatedMovieTile(
+                          child: KnownForTile(
                             movieImage:
-                                'https://image.tmdb.org/t/p/w500${value.similarMovies[index].posterPath}',
+                                'https://image.tmdb.org/t/p/w500${value.knownFor[index].posterPath}',
                           ),
                         ),
                       );

@@ -123,24 +123,6 @@ class MovieApiServices {
     }
   }
 
-  // Future<List<BiographyModel>> getBiography(String personId) async {
-  //   String endPont = 'https://api.themoviedb.org/3/person/$personId?$apiKey';
-
-  //   Response response = await get(Uri.parse(endPont));
-
-  //   if (response.statusCode == 200) {
-  //     Map<String, dynamic> json = jsonDecode(response.body);
-
-  //     List<dynamic> body = json[''];
-
-  //     List<BiographyModel> biographyModel =
-  //         body.map((dynamic item) => BiographyModel.fromJson(item)).toList();
-
-  //     return biographyModel;
-  //   } else {
-  //     throw ('cant get cast biography');
-  //   }
-  // }
   Future<List<BiographyModel>> getBiography(String personId) async {
     String endPoint = 'https://api.themoviedb.org/3/person/$personId?$apiKey';
 
@@ -156,6 +138,28 @@ class MovieApiServices {
       return [biographyModel];
     } else {
       throw Exception('Failed to get cast biography');
+    }
+  }
+
+  Future<List<MovieModel>> getKnownForMovies(String personId) async {
+    String endPoint =
+        'https://api.themoviedb.org/3/discover/movie?$apiKeyWithOutHash&sort_by=popularity.desc&with_people=$personId';
+
+    Logger().d(endPoint);
+
+    Response response = await get(Uri.parse(endPoint));
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> json = jsonDecode(response.body);
+
+      List<dynamic> body = json['results'];
+
+      List<MovieModel> movieModel =
+          body.map((dynamic item) => MovieModel.fromJson(item)).toList();
+
+      return movieModel;
+    } else {
+      throw ('cant get known for movies');
     }
   }
 }

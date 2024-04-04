@@ -6,10 +6,11 @@ import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
 import 'package:movie_app/presentation/widgets/biography.dart';
 import 'package:movie_app/presentation/widgets/blur_tumbnail_image.dart';
+import 'package:movie_app/presentation/widgets/custom_back_button.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato_small.dart';
 import 'package:movie_app/presentation/widgets/gradient_backgrount.dart';
 import 'package:movie_app/presentation/widgets/info_header.dart';
-import 'package:movie_app/presentation/widgets/releted_movie.dart';
+import 'package:movie_app/presentation/widgets/known_for_movie.dart';
 import 'package:provider/provider.dart';
 import 'package:styled_divider/styled_divider.dart';
 
@@ -46,7 +47,7 @@ class _CastBiographyState extends State<CastBiography> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // const CustomBackButton(),
+                            const CustomBackButton(),
                             SizedBox(
                               height: SizeConfig.h(context) * 0.30,
                               width: SizeConfig.w(context),
@@ -121,9 +122,7 @@ class _CastBiographyState extends State<CastBiography> {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                ReletedMovie(
-                                  movieId: value.movieModel.id.toString(),
-                                ),
+                                const KnownForMovie()
                               ],
                             ),
                           ],

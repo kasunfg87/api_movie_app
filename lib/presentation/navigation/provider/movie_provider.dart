@@ -29,6 +29,14 @@ class MovieProvider extends ChangeNotifier {
 
   List<BiographyModel> get castBiography => _castBiography;
 
+  // ----- a list to store the similar movie list
+
+  List<MovieModel> _knownFor = [];
+
+  // ----- getter for similar movie list
+
+  List<MovieModel> get knownFor => _knownFor;
+
   // ----- loading state
 
   bool _isLoading = false;
@@ -160,7 +168,8 @@ class MovieProvider extends ChangeNotifier {
       // ----- filtering the cast temp list
       // ----- removing the profile path not available cast
       for (var i = 0; i < castTemp.length; i++) {
-        if (castTemp[i].profilePath != null) {
+        if (castTemp[i].profilePath != null &&
+            castTemp[i].knownForDepartment == 'Acting') {
           _cast.add(castTemp[i]);
         }
       }
@@ -197,6 +206,7 @@ class MovieProvider extends ChangeNotifier {
 
   Future<void> getCastBiography(String personId) async {
     try {
+      Logger().e(personId);
       // start the loader
       setLoading(true);
 
@@ -204,6 +214,22 @@ class MovieProvider extends ChangeNotifier {
 
       _castBiography = await MovieApiServices().getBiography(personId);
       Logger().i(_castBiography.length);
+
+      //-- get known for movies
+
+      _knownFor = [];
+
+      List<MovieModel> knownForTemp = [];
+
+      knownForTemp = await MovieApiServices().getKnownForMovies(personId);
+
+      // ----- filtering the known for movie list
+      // ----- removing if movie poster not available
+      for (var i = 0; i < knownForTemp.length; i++) {
+        if (knownForTemp[i].posterPath != null) {
+          _knownFor.add(knownForTemp[i]);
+        }
+      }
 
       // stop the loader
       setLoading(false);

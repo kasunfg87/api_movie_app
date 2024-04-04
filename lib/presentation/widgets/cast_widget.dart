@@ -28,7 +28,7 @@ class _CastAndCrewState extends State<CastAndCrew> {
           children: value.cast.isNotEmpty
               ? [
                   const CustomTextLatoSmall(
-                    text: 'Cast',
+                    text: ' Cast & Crew',
                     fontSize: 17,
                     fontWeight: FontWeight.w500,
                   ),
