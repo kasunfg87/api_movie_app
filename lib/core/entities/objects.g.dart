@@ -147,3 +147,42 @@ Map<String, dynamic> _$BiographyModelToJson(BiographyModel instance) =>
       'popularity': instance.popularity,
       'profile_path': instance.profilePath,
     };
+
+AuthorModel _$AuthorModelFromJson(Map<String, dynamic> json) => AuthorModel(
+      name: json['name'] as String?,
+      username: json['username'] as String?,
+      avatarPath: json['avatar_path'] as String?,
+      rating: (json['rating'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$AuthorModelToJson(AuthorModel instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'username': instance.username,
+      'avatar_path': instance.avatarPath,
+      'rating': instance.rating,
+    };
+
+ReviewModel _$ReviewModelFromJson(Map<String, dynamic> json) => ReviewModel(
+      author: json['author'] as String?,
+      authorDetails: json['author_details'] == null
+          ? null
+          : AuthorModel.fromJson(
+              json['author_details'] as Map<String, dynamic>),
+      content: json['content'] as String?,
+      createdAt: json['created_at'] as String?,
+      id: json['id'] as String?,
+      updatedAt: json['updated_at'] as String?,
+      url: json['url'] as String?,
+    );
+
+Map<String, dynamic> _$ReviewModelToJson(ReviewModel instance) =>
+    <String, dynamic>{
+      'author': instance.author,
+      'author_details': instance.authorDetails?.toJson(),
+      'content': instance.content,
+      'created_at': instance.createdAt,
+      'id': instance.id,
+      'updated_at': instance.updatedAt,
+      'url': instance.url,
+    };

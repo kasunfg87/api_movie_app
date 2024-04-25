@@ -37,6 +37,14 @@ class MovieProvider extends ChangeNotifier {
 
   List<MovieModel> get knownFor => _knownFor;
 
+  // ----- a list to store the reviews  list
+
+  List<ReviewModel> _reviews = [];
+
+  // ----- getter for reviews list
+
+  List<ReviewModel> get reviews => _reviews;
+
   // ----- loading state
 
   bool _isLoading = false;
@@ -83,8 +91,7 @@ class MovieProvider extends ChangeNotifier {
       setLoading(true);
 
       _movies = await MovieApiServices().getMovies(endPoint);
-      Logger().i(_movies.length);
-      Logger().i(_movies[1].id);
+      Logger().i(_movies[3].id);
 
       // stop the loader
       setLoading(false);
@@ -105,7 +112,6 @@ class MovieProvider extends ChangeNotifier {
       setLoading(true);
 
       _movies = await MovieApiServices().searchMovie(query);
-      Logger().i(_movies[0].id);
 
       // stop the loader
       setLoading(false);
@@ -126,8 +132,6 @@ class MovieProvider extends ChangeNotifier {
       setLoading(true);
 
       _genres = await MovieApiServices().getGenre(endPoint);
-      Logger().i(_genres.length);
-      Logger().i(_genres[1].id);
 
       // stop the loader
       setLoading(false);
@@ -152,9 +156,20 @@ class MovieProvider extends ChangeNotifier {
       setMovie(movieModel);
 
       //-- get similar movies using movie id
+      _similarMovies = [];
 
-      _similarMovies =
+      List<MovieModel> similarTemp = [];
+
+      similarTemp =
           await MovieApiServices().getSimilarMovies(movieModel.id.toString());
+
+      // ----- filtering the known for movie list
+      // ----- removing if movie poster not available
+      for (var i = 0; i < similarTemp.length; i++) {
+        if (similarTemp[i].posterPath != null) {
+          _similarMovies.add(similarTemp[i]);
+        }
+      }
 
       //-- get cast and crew using movie id
 
@@ -191,6 +206,10 @@ class MovieProvider extends ChangeNotifier {
         }
       }
 
+      _reviews =
+          await MovieApiServices().getMovieReview(movieModel.id.toString());
+      Logger().f(_reviews.length);
+
       // stop the loader
       setLoading(false);
     } catch (e) {
@@ -206,18 +225,17 @@ class MovieProvider extends ChangeNotifier {
 
   Future<void> getCastBiography(String personId) async {
     try {
-      Logger().e(personId);
       // start the loader
       setLoading(true);
 
       _castBiography = [];
 
       _castBiography = await MovieApiServices().getBiography(personId);
-      Logger().i(_castBiography.length);
 
-      //-- get known for movies
-
+      //-- get known for movies after filltered
       _knownFor = [];
+
+      //-- temp list for filltering
 
       List<MovieModel> knownForTemp = [];
 
