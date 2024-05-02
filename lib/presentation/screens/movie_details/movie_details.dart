@@ -7,6 +7,7 @@ import 'package:movie_app/presentation/widgets/custom_back_button.dart';
 import 'package:movie_app/presentation/widgets/gradient_backgrount.dart';
 import 'package:movie_app/presentation/widgets/movie_header.dart';
 import 'package:movie_app/presentation/widgets/releted_movie.dart';
+import 'package:movie_app/presentation/widgets/review_widget.dart';
 import 'package:movie_app/presentation/widgets/synopsis.dart';
 import 'package:movie_app/presentation/widgets/thumbnail_image.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +58,8 @@ class _MovieDetailsState extends State<MovieDetails> {
                           ReletedMovie(
                             movieId: value.movieModel.id.toString(),
                           ),
-                          CastAndCrew(movieId: value.movieModel.id.toString())
+                          CastAndCrew(movieId: value.movieModel.id.toString()),
+                          const ReviewWidget()
                         ],
                       ),
                     ],

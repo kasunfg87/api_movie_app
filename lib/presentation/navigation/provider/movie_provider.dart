@@ -206,9 +206,9 @@ class MovieProvider extends ChangeNotifier {
         }
       }
 
+      _reviews = [];
       _reviews =
           await MovieApiServices().getMovieReview(movieModel.id.toString());
-      Logger().f(_reviews.length);
 
       // stop the loader
       setLoading(false);

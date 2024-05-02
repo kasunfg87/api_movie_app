@@ -24,6 +24,7 @@ class CustomTextLatoSmall extends StatelessWidget {
         fontSize: fontSize,
       ),
       textAlign: TextAlign.center,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

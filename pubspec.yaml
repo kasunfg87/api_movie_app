@@ -57,6 +57,7 @@ dependencies:
   youtube_player_flutter: ^8.1.2
   flutter_remix: ^0.0.3
   age_calculator: ^1.0.0
+  flutter_profile_picture: ^2.0.0
  
   
 

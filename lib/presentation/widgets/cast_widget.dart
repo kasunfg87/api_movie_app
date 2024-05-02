@@ -56,7 +56,7 @@ class _CastAndCrewState extends State<CastAndCrew> {
                               child: CastTile(castModel: value.cast[index])));
                     },
                     options: CarouselOptions(
-                        height: 250,
+                        height: 200,
                         autoPlay: true,
                         autoPlayCurve: Curves.linear,
                         viewportFraction: 0.30,
