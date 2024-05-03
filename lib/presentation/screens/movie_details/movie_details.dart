@@ -44,24 +44,19 @@ class _MovieDetailsState extends State<MovieDetails> {
                       SizedBox(
                         height: SizeConfig.h(context) * 0.30,
                       ),
-                      Column(
-                        children: [
-                          MovieHeader(
-                            movieModel: value.movieModel,
-                          ),
-                          Synopsis(
-                              movieSynopsis:
-                                  value.movieModel.overview.toString()),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          ReletedMovie(
-                            movieId: value.movieModel.id.toString(),
-                          ),
-                          CastAndCrew(movieId: value.movieModel.id.toString()),
-                          const ReviewWidget()
-                        ],
+                      MovieHeader(
+                        movieModel: value.movieModel,
                       ),
+                      Synopsis(
+                          movieSynopsis: value.movieModel.overview.toString()),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ReletedMovie(
+                        movieId: value.movieModel.id.toString(),
+                      ),
+                      CastAndCrew(movieId: value.movieModel.id.toString()),
+                      const ReviewWidget(),
                     ],
                   ),
                 )

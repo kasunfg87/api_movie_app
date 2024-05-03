@@ -106,12 +106,26 @@ class MovieProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> searchMovies(String query) async {
+  Future<void> searchMovies(String query, endPoint) async {
     try {
       // start the loader
       setLoading(true);
 
-      _movies = await MovieApiServices().searchMovie(query);
+      if (query != '') {
+        _movies = [];
+        List<MovieModel> searchTemp = [];
+        searchTemp = await MovieApiServices().searchMovie(query);
+
+        // ----- filtering the search for movie list
+        // ----- removing if movie poster not available
+        for (var i = 0; i < searchTemp.length; i++) {
+          if (searchTemp[i].posterPath != null) {
+            _movies.add(searchTemp[i]);
+          }
+        }
+      } else {
+        _movies = await MovieApiServices().getMovies(endPoint);
+      }
 
       // stop the loader
       setLoading(false);

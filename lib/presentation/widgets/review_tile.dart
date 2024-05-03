@@ -22,8 +22,8 @@ class ReviewTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ProfilePicture(
-                name: model.authorDetails!.name != null
-                    ? model.authorDetails!.name.toString()
+                name: model.authorDetails!.username != null
+                    ? model.authorDetails!.username.toString()
                     : 'Anonymous',
                 radius: 28,
                 fontsize: 21,
@@ -38,8 +38,8 @@ class ReviewTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextLatoSmall(
-                      text: model.authorDetails!.name != null
-                          ? model.authorDetails!.name.toString()
+                      text: model.authorDetails!.username != null
+                          ? model.authorDetails!.username.toString()
                           : 'Anonymous',
                       fontSize: 17,
                       fontWeight: FontWeight.w500,

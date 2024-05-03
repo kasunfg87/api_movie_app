@@ -27,6 +27,12 @@ TextEditingController textController = TextEditingController();
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
+  void dispose() {
+    selectdIndex = 0;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: kBlack,
@@ -48,7 +54,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     builder: (context, value, child) {
                       return StandardSearchBar(
                         onChanged: (input) {
-                          value.searchMovies(input);
+                          value.searchMovies(input,
+                              '$movieByGenreEndPoint${value.genres[selectdIndex].id}&$apiKey');
                         },
                         borderRadius: 25,
                         suggestionTextStyle: GoogleFonts.lato(color: kWhite),
@@ -132,7 +139,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                                 BorderRadius.circular(10)),
                                         child: Column(
                                           children: [
-                                            // value.movies[index].posterPath != null
                                             ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
