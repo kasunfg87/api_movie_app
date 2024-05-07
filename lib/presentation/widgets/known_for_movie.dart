@@ -40,7 +40,7 @@ class _KnownForMovieState extends State<KnownForMovie> {
                         child: InkWell(
                           onTap: () {
                             Provider.of<MovieProvider>(context, listen: false)
-                                .initiateMovie(value.knownFor[index]);
+                                .initializeMovie(value.knownFor[index]);
 
                             Navigator.pushNamed(
                                 context, MovieDetails.routeName);

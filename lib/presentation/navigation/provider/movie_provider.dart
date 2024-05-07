@@ -4,120 +4,60 @@ import 'package:movie_app/core/entities/objects.dart';
 import 'package:movie_app/data/remote/api_services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+/// A provider class responsible for managing movie-related data and state.
 class MovieProvider extends ChangeNotifier {
-  // -- a list to store the movie list
-
+  // List to store movies.
   List<MovieModel> _movies = [];
-
-  // ----- getter for movie list
-
   List<MovieModel> get movies => _movies;
 
-  // ----- a list to store the similar movie list
-
+  // List to store similar movies.
   List<MovieModel> _similarMovies = [];
-
-  // ----- getter for similar movie list
-
   List<MovieModel> get similarMovies => _similarMovies;
 
-  // ----- a list to store the cast biography list
-
+  // List to store cast biography.
   List<BiographyModel> _castBiography = [];
-
-  // ----- getter for cast biography list
-
   List<BiographyModel> get castBiography => _castBiography;
 
-  // ----- a list to store the similar movie list
-
+  // List to store known for movies.
   List<MovieModel> _knownFor = [];
-
-  // ----- getter for similar movie list
-
   List<MovieModel> get knownFor => _knownFor;
 
-  // ----- a list to store the reviews  list
-
+  // List to store movie reviews.
   List<ReviewModel> _reviews = [];
-
-  // ----- getter for reviews list
-
   List<ReviewModel> get reviews => _reviews;
 
-  // ----- loading state
-
-  bool _isLoading = false;
-
-  // ----- get loading state
-
-  bool get isLoading => _isLoading;
-
-  // -----chage loading state
-
-  void setLoading(bool val) {
-    _isLoading = val;
-  }
-
-  // ----- a list to store the genres list
-
+  // List to store movie genres.
   List<GenreModel> _genres = [];
-
-  // ----- getter for genres list
-
   List<GenreModel> get genres => _genres;
 
-  // ----- a list to store the cast and crew list
-
+  // List to store movie cast & crew.
   List<CastModel> _cast = [];
-
-  // ----- getter for cast and crew list
-
   List<CastModel> get cast => _cast;
 
-  // ----- a list to store the movie trailer list
-
+  // List to store movie trailers.
   List<TrailerModel> _trailer = [];
-
-  // ----- getter for movie trailer list
-
   List<TrailerModel> get trailer => _trailer;
 
-  // ----- fetch movie function
-
+  // Fetch movies.
   Future<void> getMovies(String endPoint) async {
     try {
-      // start the loader
-      setLoading(true);
-
       _movies = await MovieApiServices().getMovies(endPoint);
-      Logger().i(_movies[3].id);
-
-      // stop the loader
-      setLoading(false);
     } catch (e) {
       Logger().e(e);
-      // stop the loader
-      setLoading(false);
     } finally {
-      // stop the loader
-      setLoading(false);
       notifyListeners();
     }
   }
 
+  // Search movies.
   Future<void> searchMovies(String query, endPoint) async {
     try {
-      // start the loader
-      setLoading(true);
-
       if (query != '') {
         _movies = [];
         List<MovieModel> searchTemp = [];
         searchTemp = await MovieApiServices().searchMovie(query);
 
-        // ----- filtering the search for movie list
-        // ----- removing if movie poster not available
+        // Filtering the search for movie list, removing if movie poster not available.
         for (var i = 0; i < searchTemp.length; i++) {
           if (searchTemp[i].posterPath != null) {
             _movies.add(searchTemp[i]);
@@ -126,76 +66,49 @@ class MovieProvider extends ChangeNotifier {
       } else {
         _movies = await MovieApiServices().getMovies(endPoint);
       }
-
-      // stop the loader
-      setLoading(false);
     } catch (e) {
       Logger().e(e);
-      // stop the loader
-      setLoading(false);
     } finally {
-      // stop the loader
-      setLoading(false);
       notifyListeners();
     }
   }
 
+  // Fetch movie genres.
   Future<void> getGenreList(String endPoint) async {
     try {
-      // start the loader
-      setLoading(true);
-
       _genres = await MovieApiServices().getGenre(endPoint);
-
-      // stop the loader
-      setLoading(false);
     } catch (e) {
       Logger().e(e);
-      // stop the loader
-      setLoading(false);
     } finally {
-      // stop the loader
-      setLoading(false);
       notifyListeners();
     }
   }
 
-  Future<void> initiateMovie(MovieModel movieModel) async {
+  // Initialize movie data.
+  Future<void> initializeMovie(MovieModel movieModel) async {
     try {
-      // start the loader
-      setLoading(true);
-
-      //-- set movie for movie model
-
       setMovie(movieModel);
 
-      //-- get similar movies using movie id
+      // Get similar movies.
       _similarMovies = [];
-
       List<MovieModel> similarTemp = [];
-
       similarTemp =
           await MovieApiServices().getSimilarMovies(movieModel.id.toString());
 
-      // ----- filtering the known for movie list
-      // ----- removing if movie poster not available
+      // Filtering similar movies list.
       for (var i = 0; i < similarTemp.length; i++) {
         if (similarTemp[i].posterPath != null) {
           _similarMovies.add(similarTemp[i]);
         }
       }
 
-      //-- get cast and crew using movie id
-
-      List<CastModel> castTemp = [];
-
+      // Get cast and crew.
       _cast = [];
-
+      List<CastModel> castTemp = [];
       castTemp =
           await MovieApiServices().getMovieCast(movieModel.id.toString());
 
-      // ----- filtering the cast temp list
-      // ----- removing the profile path not available cast
+      // Filtering cast list.
       for (var i = 0; i < castTemp.length; i++) {
         if (castTemp[i].profilePath != null &&
             castTemp[i].knownForDepartment == 'Acting') {
@@ -203,107 +116,77 @@ class MovieProvider extends ChangeNotifier {
         }
       }
 
-      //-- get get movie trailer using movie id
-
-      List<TrailerModel> tailerTemp = [];
-
+      // Get movie trailers.
       _trailer = [];
-
-      tailerTemp =
+      List<TrailerModel> trailerTemp = [];
+      trailerTemp =
           await MovieApiServices().getMovieTrailer(movieModel.id.toString());
 
-      // ----- filtering the video list
-      // ----- removing the other videos
-      for (var i = 0; i < tailerTemp.length; i++) {
-        if (tailerTemp[i].type!.contains('Trailer')) {
-          _trailer.add(tailerTemp[i]);
+      // Filtering trailer list.
+      for (var i = 0; i < trailerTemp.length; i++) {
+        if (trailerTemp[i].type!.contains('Trailer')) {
+          _trailer.add(trailerTemp[i]);
         }
       }
 
+      // Get movie reviews.
       _reviews = [];
       _reviews =
           await MovieApiServices().getMovieReview(movieModel.id.toString());
-
-      // stop the loader
-      setLoading(false);
     } catch (e) {
       Logger().e(e);
-      // stop the loader
-      setLoading(false);
     } finally {
-      // stop the loader
-      setLoading(false);
       notifyListeners();
     }
   }
 
+  // Fetch cast & crew biography and known for movies.
   Future<void> getCastBiography(String personId) async {
     try {
-      // start the loader
-      setLoading(true);
-
+      // Fetch cast biography.
       _castBiography = [];
-
       _castBiography = await MovieApiServices().getBiography(personId);
 
-      //-- get known for movies after filltered
+      // Fetch known for movies.
       _knownFor = [];
-
-      //-- temp list for filltering
-
       List<MovieModel> knownForTemp = [];
-
       knownForTemp = await MovieApiServices().getKnownForMovies(personId);
 
-      // ----- filtering the known for movie list
-      // ----- removing if movie poster not available
+      // Filtering known for movies list.
       for (var i = 0; i < knownForTemp.length; i++) {
         if (knownForTemp[i].posterPath != null) {
           _knownFor.add(knownForTemp[i]);
         }
       }
-
-      // stop the loader
-      setLoading(false);
     } catch (e) {
       Logger().e(e);
-      // stop the loader
-      setLoading(false);
     } finally {
-      // stop the loader
-      setLoading(false);
       notifyListeners();
     }
   }
 
-  // ----- to store the selected movie model
-
+  // Movie Model for storing selected movie.
   late MovieModel _movieModel;
-
-  // ----- get the selected movie model
-
   MovieModel get movieModel => _movieModel;
-
-  // ----- set the movie model clicked on the movie card
-
   void setMovie(MovieModel model) {
     _movieModel = model;
-
     notifyListeners();
   }
 
+  // Youtube player functions.
   late YoutubePlayerController _controller;
-
   YoutubePlayerController get controller => _controller;
 
+  // Initialize Youtube controller.
   Future<void> initYoutubeController() async {
     _controller = YoutubePlayerController(
-        initialVideoId: _trailer[0].key.toString(),
-        flags: const YoutubePlayerFlags(
-          autoPlay: true,
-          mute: false,
-          enableCaption: false,
-          disableDragSeek: true,
-        ));
+      initialVideoId: _trailer[0].key.toString(),
+      flags: const YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
+        enableCaption: false,
+        disableDragSeek: true,
+      ),
+    );
   }
 }

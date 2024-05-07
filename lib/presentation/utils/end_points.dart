@@ -1,7 +1,7 @@
 import 'package:movie_app/data/remote/secret.dart';
 
 const nowPlayingMovieEndPoint =
-    'https://api.themoviedb.org/3/movie/now_playing?$apiKey';
+    'https://api.themoviedb.org/3/movie/now_playing?$apiKey&language=en-US&page=1&region=us';
 const popularMovieEndPoint =
     'https://api.themoviedb.org/3/movie/popular?$apiKey';
 const upcomingMovieEndPoint =

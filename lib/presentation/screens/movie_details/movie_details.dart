@@ -48,14 +48,17 @@ class _MovieDetailsState extends State<MovieDetails> {
                         movieModel: value.movieModel,
                       ),
                       Synopsis(
-                          movieSynopsis: value.movieModel.overview.toString()),
+                        movieSynopsis: value.movieModel.overview.toString(),
+                      ),
                       const SizedBox(
                         height: 20,
                       ),
                       ReletedMovie(
                         movieId: value.movieModel.id.toString(),
                       ),
-                      CastAndCrew(movieId: value.movieModel.id.toString()),
+                      CastAndCrew(
+                        movieId: value.movieModel.id.toString(),
+                      ),
                       const ReviewWidget(),
                     ],
                   ),

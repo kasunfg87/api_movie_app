@@ -8,7 +8,6 @@ part '../../data/model/trailer_model.dart';
 part '../../data/model/biography_model.dart';
 part '../../data/model/author_model.dart';
 part '../../data/model/review_model.dart';
-
 part 'objects.g.dart';
 
 // part 'objects.g.dart';

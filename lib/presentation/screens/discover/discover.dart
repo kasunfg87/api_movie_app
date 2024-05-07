@@ -123,7 +123,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
                                       Provider.of<MovieProvider>(context,
                                               listen: false)
-                                          .initiateMovie(value.movies[index]);
+                                          .initializeMovie(value.movies[index]);
 
                                       //-- navigate to details screen
 

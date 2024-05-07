@@ -41,7 +41,7 @@ class _ReletedMovieState extends State<ReletedMovie> {
                         child: InkWell(
                           onTap: () {
                             Provider.of<MovieProvider>(context, listen: false)
-                                .initiateMovie(value.similarMovies[index]);
+                                .initializeMovie(value.similarMovies[index]);
                           },
                           child: RelatedMovieTile(
                             movieImage:

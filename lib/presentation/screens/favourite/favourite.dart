@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class FavouriteScreen extends StatefulWidget {
+  const FavouriteScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<FavouriteScreen> createState() => _FavouriteScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Center(
         child: Text(
-      'Profile Screen',
+      'Favourite Screen',
       style: GoogleFonts.lato(color: kWhite),
     ));
   }

@@ -9,7 +9,6 @@ import 'package:movie_app/presentation/utils/end_points.dart';
 import 'package:movie_app/presentation/utils/size_config.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -116,41 +115,28 @@ class _DashboardState extends State<Dashboard> {
                 return CarouselSlider.builder(
                     itemCount: value.movies.isEmpty ? 0 : value.movies.length,
                     itemBuilder: (context, index, realIndex) {
-                      return value.isLoading
-                          ? Shimmer.fromColors(
-                              baseColor: kOrange.withOpacity(0.8),
-                              highlightColor: kWhite.withOpacity(0.5),
-                              enabled: true,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                            )
-                          : InkWell(
-                              onTap: () {
-                                //-- initiate movie
+                      return InkWell(
+                        onTap: () {
+                          //-- initiate movie
 
-                                Provider.of<MovieProvider>(context,
-                                        listen: false)
-                                    .initiateMovie(value.movies[index]);
+                          Provider.of<MovieProvider>(context, listen: false)
+                              .initializeMovie(value.movies[index]);
 
-                                //-- navigate to details screen
+                          //-- navigate to details screen
 
-                                Navigator.pushNamed(
-                                    context, MovieDetails.routeName);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: kGray,
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: NetworkImage(
-                                          'https://image.tmdb.org/t/p/w500${value.movies[index].posterPath}')),
-                                ),
-                              ),
-                            );
+                          Navigator.pushNamed(context, MovieDetails.routeName);
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: kGray,
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                    'https://image.tmdb.org/t/p/w500${value.movies[index].posterPath}')),
+                          ),
+                        ),
+                      );
                     },
                     options: CarouselOptions(
                       height: 370,

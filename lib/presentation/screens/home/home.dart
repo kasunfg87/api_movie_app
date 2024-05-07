@@ -4,7 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:movie_app/presentation/navigation/provider/movie_provider.dart';
 import 'package:movie_app/presentation/screens/dashboard/dashboard.dart';
 import 'package:movie_app/presentation/screens/discover/discover.dart';
-import 'package:movie_app/presentation/screens/movie_details/movie_details.dart';
+import 'package:movie_app/presentation/screens/favourite/favourite.dart';
 import 'package:movie_app/presentation/utils/app_colors.dart';
 import 'package:movie_app/presentation/utils/end_points.dart';
 import 'package:movie_app/presentation/widgets/custom_text_lato_small.dart';
@@ -25,7 +25,7 @@ class _MyHomeState extends State<MyHome> {
   void initState() {
     super.initState();
     Provider.of<MovieProvider>(context, listen: false)
-        .getMovies(popularMovieEndPoint);
+        .getMovies(nowPlayingMovieEndPoint);
 
     Provider.of<MovieProvider>(context, listen: false)
         .getGenreList(genreEndPoint);
@@ -44,7 +44,7 @@ class _MyHomeState extends State<MyHome> {
   List<Widget> screens = [
     const Dashboard(),
     const DiscoverScreen(),
-    const MovieDetails()
+    const FavouriteScreen()
   ];
 
   @override
