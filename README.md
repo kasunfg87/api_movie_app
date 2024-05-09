@@ -9,7 +9,7 @@
 <!-- Screenshots/GIFs -->
 <div align="center">
   <!-- Add Screenshots or GIFs showcasing your app -->
-  <img src="screenshots/home_screen.png" alt="Home Screen" width="200" />
+  <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/Dashboard.png?raw=true" alt="Home Screen" width="200" />
   <img src="screenshots/discover_screen.png" alt="Discover Screen" width="200" />
   <img src="screenshots/detail_screen.png" alt="Detail Screen" width="200" />
   <img src="screenshots/profile_screen.png" alt="Profile Screen" width="200" />
