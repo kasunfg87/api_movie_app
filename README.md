@@ -40,7 +40,12 @@ Explain briefly what your project is about and what motivated you to create it.
 ## Screens
 
 ### Dashboard Screen
-Describe the features and functionality of the Home Screen.
+The Dashboard is a screen in a api movie app that displays various features:
+
+Main Banner: At the top, there's a large image with a title "Stream Everywhere". Below it, there's a smaller section showing a video player icon and the title "Continue Watching".
+Trending Movies: Below the main banner, there's a section titled "Trending" which displays a carousel of trending movies. Each movie is represented by its poster image.
+Movie Selection: Users can tap on any movie poster to view its details on a separate screen.
+Auto-Play Carousel: The carousel of trending movies automatically scrolls to display different movies.
 
 ### Discover Screen
 Explain the purpose and features of the Discover Screen.
