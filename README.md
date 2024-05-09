@@ -39,7 +39,7 @@ Explain briefly what your project is about and what motivated you to create it.
 <!-- Screens -->
 ## Screens
 
-### Home Screen
+### Dashboard Screen
 Describe the features and functionality of the Home Screen.
 
 ### Discover Screen
@@ -48,7 +48,7 @@ Explain the purpose and features of the Discover Screen.
 ### Detail Screen
 Provide details about the Detail Screen, highlighting any unique features.
 
-### Profile Screen
+### Cast & Crew Biography Screen
 Describe the user profile screen and its components.
 
 <!-- Getting Started -->
