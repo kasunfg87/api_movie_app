@@ -14,23 +14,6 @@
   <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/Details%20-%2001.png?raw=true" alt="Detail Screen" width="200" />
   <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/Cast%20Biography.png?raw=true" alt=" Cast & Crew Biography Screen" width="200" />
 </div>
-
-<!-- Table of Contents -->
-<h2>Table of Contents</h2>
-
-- [About the Project](#about-the-project)
-- [Screens](#screens)
-  - [Home Screen](#home-screen)
-  - [Discover Screen](#discover-screen)
-  - [Detail Screen](#detail-screen)
-  - [Profile Screen](#profile-screen)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-
 <!-- About the Project -->
 ## About the Project
 
