@@ -50,10 +50,7 @@ Discover related movies and explore the works of actors and directors, enriching
 <h4 align="left"></h4> 
 The app is built using the Provider package to efficiently manage state, ensuring smooth performance and responsiveness. Drawing inspiration from the clean architecture design principles and leveraging Figma community designs, the app boasts a visually appealing layout that enhances user engagement.
 
-<!-- License -->
-## License
 
-Specify the license under which your project is distributed.
 
 ```html
 
