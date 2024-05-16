@@ -21,7 +21,8 @@ TMDB API Movie App is a dynamic Flutter application meticulously crafted to harn
 
 With a sleek interface and intuitive design, users can effortlessly navigate through an array of functionalities:
 
-Trending Movies: Stay updated with the latest trends in the film industry, showcasing the most popular movies of the moment.
+###Trending Movies:
+Stay updated with the latest trends in the film industry, showcasing the most popular movies of the moment.
 
 Popular Movies: Dive into the realm of popular cinema, exploring a curated selection of films that have captured the audience's attention.
 
