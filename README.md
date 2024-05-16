@@ -2,9 +2,7 @@
 <h1 align="left">API Movie App</h1>
 
 <!-- Project Description -->
-<p align="center">
-  A Flutter application that leverages movie APIs to provide users with a seamless experience for discovering and exploring movies.
-</p>
+
 
 <!-- Screenshots/GIFs -->
 <div align="center">
