@@ -51,4 +51,4 @@ The app is built using the Provider package to efficiently manage state, ensurin
 
 
 ```html
-
+TMDB API Movie App is a dynamic Flutter application meticulously crafted to harness the power of TMDB API seamlessly. This app serves as a comprehensive gateway to the world of cinema, leveraging the expansive features offered by TMDB API.
