@@ -9,10 +9,10 @@
 <!-- Screenshots/GIFs -->
 <div align="center">
   <!-- Add Screenshots or GIFs showcasing your app -->
-  <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/Dashboard.png?raw=true" alt="Home Screen" width="200" />
-  <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/Discover.png?raw=true" alt="Discover Screen" width="200" />
-  <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/Details%20-%2001.png?raw=true" alt="Detail Screen" width="200" />
-  <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/Cast%20Biography.png?raw=true" alt=" Cast & Crew Biography Screen" width="200" />
+  <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/1.png?raw=true" alt="Home Screen" width="200" />
+  <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/2.png?raw=true" alt="Discover Screen" width="200" />
+  <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/3.png?raw=true" alt="Detail Screen" width="200" />
+  <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/4.png?raw=true" alt=" Cast & Crew Biography Screen" width="200" />
 </div>
 <!-- About the Project -->
 
