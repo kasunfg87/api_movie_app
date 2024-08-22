@@ -13,6 +13,8 @@
   <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/2.png?raw=true" alt="Discover Screen" width="200" />
   <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/3.png?raw=true" alt="Detail Screen" width="200" />
   <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/4.png?raw=true" alt=" Cast & Crew Biography Screen" width="200" />
+   <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/5.png?raw=true" alt=" Cast & Crew Biography Screen" width="200" />
+   <img src="https://github.com/kasunfg87/api_movie_app/blob/main/assets/images/6.png?raw=true" alt=" Cast & Crew Biography Screen" width="200" />
 </div>
 <!-- About the Project -->
 
